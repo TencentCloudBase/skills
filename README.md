@@ -8,7 +8,7 @@ These skills are sourced from: `config/.claude/skills/` in the CloudBase AI Tool
 
 **Repository**: [TencentCloudBase/CloudBase-AI-ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 
-**Last Updated**: 2026-01-23
+**Last Updated**: 2026-01-30
 
 ## Usage
 
@@ -57,7 +57,7 @@ This repository contains 22 skills:
   Use CloudBase Auth tool to configure and manage authentication providers for web applications - enable/disable login methods (SMS, Email, WeChat Open Platform, Google, Anonymous, Username/password, OAuth, SAML, CAS, Dingding, etc.) and configure provider settings via MCP tools `callCloudApi`.
 
 - **auth-web** (auth-web-cloudbase)
-  CloudBase Auth v3 Web SDK - Quick Reference Guide
+  CloudBase Web Authentication Quick Guide - Provides concise and practical Web frontend authentication solutions with multiple login methods and complete user management.
 
 - **auth-wechat** (auth-wechat-miniprogram)
   Complete guide for WeChat Mini Program authentication with CloudBase - native login, user identity, and cloud function integration.
