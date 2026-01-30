@@ -46,6 +46,39 @@ mcpServers:
     args: ["@cloudbase/cloudbase-mcp@latest"]
 ```
 
+### Using mcporter (CLI) When MCP Is Not Available
+
+In environments that do not support MCP (e.g. moltbot) or when users are unsure how to configure MCP, use **mcporter** as a CLI to call MCP tools. **Confirm with the user** that Secret ID, Secret Key, and Env ID are set in the mcporter config.
+
+**Config:** Default `./config/mcporter.json` (override with `--config`). Prefer `--output json` for machine-readable results.
+
+```json
+{
+  "mcpServers": {
+    "cloudbase-mcp": {
+      "description": "CloudBase MCP",
+      "command": "npx",
+      "args": ["@cloudbase/cloudbase-mcp@latest"],
+      "env": {
+        "TENCENTCLOUD_SECRETID": "<your_secret_id>",
+        "TENCENTCLOUD_SECRETKEY": "<your_secret_key>",
+        "CLOUDBASE_ENV_ID": "<your_env_id>"
+      }
+    }
+  }
+}
+```
+
+**Quick start:**
+- `mcporter list` — list servers/tools
+- `mcporter list <server> --schema` — show tool schema
+- `mcporter call <server.tool> key=value` — call a tool
+
+**Call examples:**
+- Selector: `mcporter call linear.list_issues team=ENG limit:5`
+- Function syntax: `mcporter call "linear.create_issue(title: \"Bug\")"`
+- JSON payload: `mcporter call <server.tool> --args '{"limit":5}'`
+
 ---
 
 ## Quick Reference
