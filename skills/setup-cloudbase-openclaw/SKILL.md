@@ -23,7 +23,7 @@ Before starting, ensure you have:
 | 4 | Update AGENTS.md | Add CloudBase development rules |
 | 5 | Install skills | Install CloudBase-related skills |
 | 6 | Copy app template (optional) | Copy CloudBase React template to workspace |
-| 7 | Restart gateway | Apply all changes |
+| 7 | Apply changes | Use /new to start a new session |
 
 ---
 
@@ -188,7 +188,7 @@ When working with CloudBase projects, the agent MUST:
 
 3. **Prefer SDK + security rules** - If the requirement can be satisfied with the document database SDK and security rules alone, do NOT introduce cloud functions.
 
-4. **Deploy to subdirectory** - When deploying web apps to static hosting, use a subdirectory path (e.g., `/my-app/`), not the root.
+4. **Deploy to subdirectory (mandatory)** - When deploying web apps to static hosting, you MUST use a subdirectory path (e.g., `/my-app/`), not the root, unless the user explicitly asks otherwise.
 
 5. **Auto-deploy web apps** - After completing a web application, automatically deploy it to CloudBase static hosting using MCP tools.
 ```
@@ -285,24 +285,9 @@ app/
 
 ---
 
-## Step 7: Apply Changes and Restart
+## Step 7: Apply Changes
 
-After making configuration changes, restart the gateway:
-
-```bash
-# If using moltbot CLI
-moltbot gateway restart
-
-# If using clawdbot CLI
-clawdbot restart
-
-# Or manually restart the service
-systemctl --user restart moltbot
-# or
-systemctl --user restart clawdbot
-```
-
-**Start a new session** to use the updated configuration.
+Use **/new** to start a new session so the agent picks up the updated configuration (AGENTS.md, MCP, skills).
 
 ---
 
