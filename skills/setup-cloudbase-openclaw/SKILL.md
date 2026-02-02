@@ -191,14 +191,6 @@ When working with CloudBase projects, the agent MUST:
 4. **Deploy to subdirectory** - When deploying web apps to static hosting, use a subdirectory path (e.g., `/my-app/`), not the root.
 
 5. **Auto-deploy web apps** - After completing a web application, automatically deploy it to CloudBase static hosting using MCP tools.
-
-## MCP Tools Reference
-
-The following MCP tools are available for CloudBase development:
-
-- **callCloudApi** - Make authenticated requests to CloudBase HTTP APIs
-- **uploadFiles** - Deploy files to CloudBase static hosting
-- Database operations via SQL tools (for relational database)
 ```
 
 ---

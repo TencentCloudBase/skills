@@ -5,8 +5,15 @@
   "type": "module",
   "main": "SKILL.md",
   "bin": {
-    "setup-cloudbase-openclaw": "./scripts/setup.mjs"
+    "setup-cloudbase-openclaw": "./setup-cloudbase-openclaw.js"
   },
+  "files": [
+    "SKILL.md",
+    "README.md",
+    "references",
+    "scripts",
+    "setup-cloudbase-openclaw.js"
+  ],
   "scripts": {
     "detect": "node scripts/setup.mjs detect",
     "detect:bash": "bash scripts/detect-setup.sh detect",

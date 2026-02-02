@@ -128,6 +128,21 @@ Should see CloudBase-related tools
 2. Verify SYMLINKS are created correctly
 3. Restart the gateway after installing skills
 
+## Publishing (maintainers)
+
+Publish to the **official npm registry** (not npmmirror). From this directory:
+
+```bash
+# Log in to npm (only once)
+npm login --registry https://registry.npmjs.org
+
+# Bump version if needed, then publish
+npm version patch   # or minor/major
+npm publish --registry https://registry.npmjs.org
+```
+
+If your shell uses npmmirror by default, `npm publish` without `--registry` will fail with `ENEEDAUTH`; always pass `--registry https://registry.npmjs.org` for publish.
+
 ## Links
 
 - [CloudBase MCP](https://github.com/TencentCloudBase/cloudbase-mcp)
