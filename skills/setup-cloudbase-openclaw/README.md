@@ -7,33 +7,35 @@ This skill helps you configure your OpenClaw/Moltbot installation for CloudBase 
 ### Option 1: Run the Setup Script
 
 ```bash
-# Using bash - detect installation
-bash <(curl -s https://raw.githubusercontent.com/tencentcloudbase/skills/main/scripts/detect-setup.sh) detect
-
-# Or using Node.js
 npx @cloudbase/setup-openclaw detect
 ```
 
 ### Option 2: Copy App Template
 
 ```bash
-# Copy the CloudBase React template to a new project directory
-bash <(curl -s https://raw.githubusercontent.com/tencentcloudbase/skills/main/scripts/detect-setup.sh) copy-template --dest /path/to/my-project
-
-# Or using Node.js
 npx @cloudbase/setup-openclaw copy-template --dest /path/to/my-project
 ```
 
-### Option 3: Manual Setup
+### Option 3: Install Skill Enhancer Plugin
+
+```bash
+# Install the skill-enhancer plugin (optional but recommended)
+npx @cloudbase/setup-openclaw install-plugin
+```
+
+This plugin automatically instructs the model to list available skills and justify their usage before responding.
+
+### Option 4: Manual Setup
 
 Follow these steps:
 
 1. **Find your workspace** - Check your config file for the workspace path
 2. **Configure MCP** - Add CloudBase MCP to `<workspace>/config/mcporter.json`
 3. **Update AGENTS.md** - Add CloudBase development rules
-4. **Install skills** - `npx skills add tencentcloudbase/skills -y`
-5. **Copy app template (optional)** - `cp -r <workspace>/app <workspace>/my-new-project`
-6. **Restart gateway** - `moltbot gateway restart`
+4. **Install skill-enhancer plugin (optional)** - `npx @cloudbase/setup-openclaw install-plugin`
+5. **Install skills** - `npx skills add tencentcloudbase/skills -y`
+6. **Copy app template (optional)** - `cp -r <workspace>/app <workspace>/my-new-project`
+7. **Restart gateway** - `moltbot gateway restart`
 
 See [SKILL.md](./SKILL.md) for detailed instructions.
 
@@ -43,6 +45,7 @@ See [SKILL.md](./SKILL.md) for detailed instructions.
 - ✅ Finds your workspace configuration
 - ✅ Checks for existing CloudBase MCP setup
 - ✅ Verifies CloudBase skills are installed
+- ✅ Installs skill-enhancer plugin (optional) to enforce proper skill usage
 - ✅ Copies CloudBase React template for new projects
 - ✅ Provides step-by-step guidance for configuration
 

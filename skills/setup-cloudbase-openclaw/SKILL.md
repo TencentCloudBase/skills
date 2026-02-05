@@ -21,9 +21,10 @@ Before starting, ensure you have:
 | 2 | Locate workspace | Identify the agent workspace directory |
 | 3 | Configure MCP | Set up CloudBase MCP with credentials |
 | 4 | Update AGENTS.md | Add CloudBase development rules |
-| 5 | Install skills | Install CloudBase-related skills |
-| 6 | Copy app template (optional) | Copy CloudBase React template to workspace |
-| 7 | Apply changes | Use /new to start a new session |
+| 5 | Install skill-enhancer plugin (optional) | Install plugin to enforce skill usage |
+| 6 | Install skills | Install CloudBase-related skills |
+| 7 | Copy app template (optional) | Copy CloudBase React template to workspace |
+| 8 | Apply changes | Use /new to start a new session |
 
 ---
 
@@ -50,14 +51,10 @@ ls -la ~/.moltbot/
 **Run the setup script to auto-detect:**
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/tencentcloudbase/skills/main/scripts/detect-setup.sh)
-```
-
-Or use the Node.js version:
-
-```bash
 npx @cloudbase/setup-openclaw detect
 ```
+
+This command automatically downloads and runs the latest version of the setup script from npm.
 
 ---
 
@@ -97,7 +94,7 @@ You need three values:
 
 **How to get them:**
 
-1. **EnvId**: Go to [CloudBase Console](https://tcb.cloud.tencent.com)
+1. **EnvId**: Go to [CloudBase Console](https://tcb.cloud.tencent.com/dev)
    - Select your environment
    - Copy the Environment ID from the top-left corner
 
@@ -188,14 +185,65 @@ When working with CloudBase projects, the agent MUST:
 
 3. **Prefer SDK + security rules** - If the requirement can be satisfied with the document database SDK and security rules alone, do NOT introduce cloud functions.
 
-4. **Deploy to subdirectory (mandatory)** - When deploying web apps to static hosting, you MUST use a subdirectory path (e.g., `/my-app/`), not the root, unless the user explicitly asks otherwise.
+4. The workspace includes a **CloudBase + React template** (`app/` directory) that you can copy as a starting point for new projects.
 
-5. **Auto-deploy web apps** - After completing a web application, automatically deploy it to CloudBase static hosting using MCP tools.
+
+
+5. **Deploy to subdirectory (mandatory)** - When deploying web apps to static hosting, you MUST use a subdirectory path (e.g., `/my-app/`), not the root, unless the user explicitly asks otherwise.
+
+6. **Auto-deploy web apps** - After completing a web application, automatically deploy it to CloudBase static hosting using MCP tools.
 ```
 
 ---
 
-## Step 5: Install CloudBase Skills
+## Step 5: Install Skill Enhancer Plugin (Optional)
+
+The **skill-enhancer** plugin automatically instructs the model to list available skills and justify their usage before responding, ensuring skills are properly considered before writing code.
+
+### 5.1 Install the Plugin
+
+```bash
+npx @cloudbase/setup-openclaw install-plugin
+```
+
+**What it does:**
+- Detects your OpenClaw/Moltbot installation directory (`~/.openclaw/`, `~/.clawdbot/`, or `~/.moltbot/`)
+- Creates `extensions/skill-enhancer/` directory in the installation directory
+- Copies plugin files (`openclaw.plugin.json` and `index.ts`) from the skill package
+- Creates or updates `openclaw.json` to enable the plugin
+- Provides instructions to restart the gateway
+
+### 5.2 Plugin Behavior
+
+The plugin injects instructions into the model's context before each turn:
+- **Lists available Skills** that can be used for the request
+- **States the reason** for calling each Skill
+- **Prevents skipping Skills** - requires reading relevant skills before writing code
+
+**Example:** When working with CloudBase projects, the model will be instructed to read `cloudbase-guidelines` skill FIRST before writing any code.
+
+### 5.3 Restart Gateway
+
+After installation, restart the gateway to load the plugin:
+
+```bash
+# For Moltbot
+moltbot gateway restart
+
+# For OpenClaw
+openclaw gateway restart
+
+# Or for Clawdbot
+clawdbot restart
+```
+
+**Verify plugin is loaded:**
+
+After restarting, the plugin will automatically inject instructions into the model's context. You can verify this by asking the agent a question and checking if it lists available skills before responding.
+
+---
+
+## Step 6: Install CloudBase Skills
 
 Install the CloudBase skills package to make all CloudBase-related skills available:
 
@@ -226,64 +274,6 @@ You should see skills like:
 
 ---
 
-## Step 6: Copy App Template (Optional)
-
-The workspace includes a **CloudBase + React template** (`app/` directory) that you can copy as a starting point for new projects.
-
-**What's included in the template:**
-
-- React 19 + Vite 6 + TypeScript
-- Tailwind CSS + DaisyUI
-- CloudBase Web SDK integration
-- Example project (Swimming Tracker)
-- Build configuration and deployment scripts
-
-**To copy the template to your workspace:**
-
-```bash
-# Option 1: Copy to a new project directory
-cp -r <workspace>/app <workspace>/my-new-project
-
-# Option 2: Use the setup script to copy
-npx @cloudbase/setup-openclaw copy-template --dest <workspace>/my-project
-```
-
-**After copying, update the configuration:**
-
-1. **Update `cloudbaserc.json`** - Replace `{{env.ENV_ID}}` with your actual Environment ID
-2. **Install dependencies:**
-   ```bash
-   cd <workspace>/my-new-project
-   npm install
-   ```
-3. **Run development server:**
-   ```bash
-   npm run dev
-   ```
-4. **Build for production:**
-   ```bash
-   npm run build
-   ```
-
-**Template structure:**
-
-```
-app/
-├── src/
-│   ├── components/         # React components
-│   ├── types/             # TypeScript types
-│   ├── utils/             # Utilities (CloudBase SDK, API)
-│   └── main.tsx           # App entry point
-├── public/                # Static assets
-├── cloudfunctions/        # Cloud functions (optional)
-├── cloudbaserc.json       # CloudBase deployment config
-├── vite.config.ts         # Vite build config
-├── tailwind.config.js     # Tailwind CSS config
-├── tsconfig.json          # TypeScript config
-└── package.json           # Dependencies and scripts
-```
-
----
 
 ## Step 7: Apply Changes
 
@@ -313,6 +303,12 @@ To verify everything is working correctly:
    Should use MCP to query environment details
    ```
 
+4. **Verify plugin is working (if installed):**
+   ```
+   Ask the agent: "Create a simple CloudBase web app"
+   Should list available skills (e.g., cloudbase-guidelines, web-development) before writing code
+   ```
+
 ---
 
 ## Troubleshooting
@@ -337,6 +333,14 @@ To verify everything is working correctly:
 2. Ensure AGENTS.md exists in the workspace root
 3. Check that the agent has read/write permissions
 
+### Plugin not working
+
+1. Verify plugin files exist in `~/.openclaw/extensions/skill-enhancer/` (or equivalent for your installation)
+2. Check that `openclaw.json` has the plugin enabled: `"skill-enhancer": { "enabled": true }`
+3. Restart the gateway after installation
+4. Check gateway logs for plugin loading errors
+5. Ensure you're using a version of OpenClaw that supports plugins
+
 ---
 
 ## Reference: OpenClaw Skills Loading
@@ -353,7 +357,7 @@ OpenClaw loads skills from multiple locations, in priority order:
 
 ## Need Help?
 
-- [CloudBase MCP Documentation](https://github.com/ TencentCloudBase/cloudbase-mcp)
+- [CloudBase MCP Documentation](https://github.com/TencentCloudBase/cloudbase-mcp)
 - [CloudBase Console](https://tcb.cloud.tencent.com)
 - [Skills Hub](https://skills.sh/)
 - [OpenClaw Documentation](https://docs.molt.bot)

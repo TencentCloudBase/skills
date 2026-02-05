@@ -59,6 +59,7 @@ function findConfigFile(installDir) {
   const possibleConfigs = [
     path.join(installDir, 'moltbot.json'),
     path.join(installDir, 'config.json'),
+    path.join(installDir, 'openclaw.json'),
     path.join(homeDir, '.moltbot', 'moltbot.json'),
   ];
 
@@ -68,6 +69,21 @@ function findConfigFile(installDir) {
     }
   }
   return null;
+}
+
+function readJsonFile(filePath) {
+  try {
+    const content = fs.readFileSync(filePath, 'utf-8');
+    // Support JSON5 comments
+    const cleaned = content.replace(/\/\/.*$/gm, '').replace(/\/\*[\s\S]*?\*\//g, '');
+    return JSON.parse(cleaned);
+  } catch (err) {
+    return null;
+  }
+}
+
+function writeJsonFile(filePath, data) {
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2) + '\n', 'utf-8');
 }
 
 function extractWorkspace(configFile) {
@@ -345,6 +361,141 @@ function copyTemplate(destDir) {
   log('   npm run build', 'reset');
 }
 
+function readJsonFile(filePath) {
+  try {
+    const content = fs.readFileSync(filePath, 'utf-8');
+    // Support JSON5 comments
+    const cleaned = content.replace(/\/\/.*$/gm, '').replace(/\/\*[\s\S]*?\*\//g, '');
+    return JSON.parse(cleaned);
+  } catch (err) {
+    return null;
+  }
+}
+
+function writeJsonFile(filePath, data) {
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2) + '\n', 'utf-8');
+}
+
+function installPlugin() {
+  log('=== Installing skill-enhancer Plugin ===\n', 'blue');
+
+  // Step 1: Find installation directory
+  const installDir = findInstallDir();
+  if (!installDir) {
+    log('✗ Could not find OpenClaw/Moltbot installation directory.', 'red');
+    log('Please check your installation and try again.', 'red');
+    process.exit(1);
+  }
+
+  log(`✓ Found installation directory: ${installDir}`, 'green');
+
+  // Step 2: Create extensions directory
+  const extensionsDir = path.join(installDir, 'extensions');
+  if (!fs.existsSync(extensionsDir)) {
+    fs.mkdirSync(extensionsDir, { recursive: true });
+    log(`✓ Created extensions directory: ${extensionsDir}`, 'green');
+  } else {
+    log(`✓ Extensions directory exists: ${extensionsDir}`, 'green');
+  }
+
+  // Step 3: Copy plugin files
+  const pluginSourceDir = path.join(__dirname, '..', 'plugins', 'skill-enhancer');
+  const pluginDestDir = path.join(extensionsDir, 'skill-enhancer');
+
+  if (!fs.existsSync(pluginSourceDir)) {
+    log(`✗ Plugin source directory not found: ${pluginSourceDir}`, 'red');
+    process.exit(1);
+  }
+
+  // Create plugin directory
+  if (!fs.existsSync(pluginDestDir)) {
+    fs.mkdirSync(pluginDestDir, { recursive: true });
+  }
+
+  // Copy plugin files
+  const filesToCopy = ['openclaw.plugin.json', 'index.ts'];
+  for (const file of filesToCopy) {
+    const srcPath = path.join(pluginSourceDir, file);
+    const destPath = path.join(pluginDestDir, file);
+    
+    if (fs.existsSync(srcPath)) {
+      fs.copyFileSync(srcPath, destPath);
+      log(`✓ Copied ${file}`, 'green');
+    } else {
+      log(`⚠ File not found: ${file}`, 'yellow');
+    }
+  }
+
+  // Step 4: Update openclaw.json config
+  const configFile = findConfigFile(installDir);
+  let configPath = path.join(installDir, 'openclaw.json');
+  
+  // If config file exists but is not openclaw.json, we still need to update openclaw.json
+  if (configFile && !configFile.endsWith('openclaw.json')) {
+    // Check if openclaw.json exists separately
+    const openclawJsonPath = path.join(installDir, 'openclaw.json');
+    if (!fs.existsSync(openclawJsonPath)) {
+      // Create new openclaw.json
+      writeJsonFile(openclawJsonPath, {
+        plugins: {
+          entries: {
+            'skill-enhancer': { enabled: true }
+          }
+        }
+      });
+      log(`✓ Created ${openclawJsonPath}`, 'green');
+      configPath = openclawJsonPath;
+    } else {
+      configPath = openclawJsonPath;
+    }
+  }
+
+  // Read existing config or create new
+  let config = readJsonFile(configPath);
+  if (!config) {
+    config = {};
+  }
+
+  // Initialize plugins structure if needed
+  if (!config.plugins) {
+    config.plugins = {};
+  }
+  if (!config.plugins.entries) {
+    config.plugins.entries = {};
+  }
+
+  // Enable the plugin
+  config.plugins.entries['skill-enhancer'] = { enabled: true };
+
+  // Write config
+  writeJsonFile(configPath, config);
+  log(`✓ Updated ${configPath}`, 'green');
+
+  console.log('');
+  log('=== Installation Complete ===', 'blue');
+  log('Plugin installed successfully!', 'green');
+  console.log('');
+  log('=== Next Steps ===', 'blue');
+  log('1. Restart the gateway to load the plugin:', 'yellow');
+  
+  try {
+    execSync('which moltbot', { stdio: 'ignore' });
+    log('   moltbot gateway restart', 'reset');
+  } catch {
+    try {
+      execSync('which clawdbot', { stdio: 'ignore' });
+      log('   clawdbot restart', 'reset');
+    } catch {
+      log('   openclaw gateway restart', 'reset');
+    }
+  }
+  
+  console.log('');
+  log('2. The plugin will automatically inject instructions to the model', 'reset');
+  log('   to list available skills and justify their usage.', 'reset');
+  console.log('');
+}
+
 // CLI interface
 const args = process.argv.slice(2);
 const command = args[0];
@@ -355,6 +506,8 @@ if (command === 'detect') {
   const destIndex = args.indexOf('--dest');
   const destDir = destIndex >= 0 ? args[destIndex + 1] : null;
   copyTemplate(destDir);
+} else if (command === 'install-plugin') {
+  installPlugin();
 } else {
   // Default: run detect
   detect();

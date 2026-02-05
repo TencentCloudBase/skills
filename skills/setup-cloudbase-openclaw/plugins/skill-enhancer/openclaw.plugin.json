@@ -1,0 +1,7 @@
+{
+  "id": "skill-enhancer",
+  "name": "Skill Enhancer",
+  "version": "1.0.0",
+  "description": "Instructs the model to list available skills and justify usage before each turn.",
+  "main": "index.ts"
+}

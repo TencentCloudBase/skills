@@ -12,13 +12,15 @@
     "README.md",
     "references",
     "scripts",
+    "plugins",
     "setup-cloudbase-openclaw.js"
   ],
   "scripts": {
     "detect": "node scripts/setup.mjs detect",
     "detect:bash": "bash scripts/detect-setup.sh detect",
     "copy-template": "node scripts/setup.mjs copy-template",
-    "copy-template:bash": "bash scripts/detect-setup.sh copy-template"
+    "copy-template:bash": "bash scripts/detect-setup.sh copy-template",
+    "install-plugin": "node scripts/setup.mjs install-plugin"
   },
   "keywords": [
     "cloudbase",
