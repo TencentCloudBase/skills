@@ -20,7 +20,8 @@
     "detect:bash": "bash scripts/detect-setup.sh detect",
     "copy-template": "node scripts/setup.mjs copy-template",
     "copy-template:bash": "bash scripts/detect-setup.sh copy-template",
-    "install-plugin": "node scripts/setup.mjs install-plugin"
+    "install-plugin": "node scripts/setup.mjs install-plugin",
+    "test": "node scripts/test-env.mjs"
   },
   "keywords": [
     "cloudbase",

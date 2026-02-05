@@ -154,9 +154,13 @@ function detect() {
 
     // Check skills directory
     const skillsDir = path.join(workspace, 'skills');
-    if (fs.existsSync(skillsDir) || fs.lstatSync(skillsDir)?.isSymbolicLink()) {
-      log('✓ Skills directory found', 'green');
-    } else {
+    try {
+      if (fs.existsSync(skillsDir) || (fs.lstatSync(skillsDir).isSymbolicLink())) {
+        log('✓ Skills directory found', 'green');
+      } else {
+        log('⚠ Skills directory not found', 'yellow');
+      }
+    } catch {
       log('⚠ Skills directory not found', 'yellow');
     }
 
@@ -219,12 +223,16 @@ function detect() {
     'cloud-functions',
   ];
 
-  if (fs.existsSync(skillsDir) || fs.lstatSync(skillsDir)?.isSymbolicLink()) {
+  if (fs.existsSync(skillsDir)) {
     for (const skill of skillsToCheck) {
       const skillPath = path.join(skillsDir, skill);
-      if (fs.existsSync(skillPath) || fs.lstatSync(skillPath)?.isSymbolicLink()) {
-        log(`✓ Found skill: ${skill}`, 'green');
-        cloudbaseSkillsCount++;
+      try {
+        if (fs.existsSync(skillPath) && (fs.statSync(skillPath).isDirectory() || fs.lstatSync(skillPath).isSymbolicLink())) {
+          log(`✓ Found skill: ${skill}`, 'green');
+          cloudbaseSkillsCount++;
+        }
+      } catch {
+        // Skip missing or inaccessible skill path
       }
     }
   }
@@ -359,21 +367,6 @@ function copyTemplate(destDir) {
   console.log('');
   log('4. Build for production:', 'yellow');
   log('   npm run build', 'reset');
-}
-
-function readJsonFile(filePath) {
-  try {
-    const content = fs.readFileSync(filePath, 'utf-8');
-    // Support JSON5 comments
-    const cleaned = content.replace(/\/\/.*$/gm, '').replace(/\/\*[\s\S]*?\*\//g, '');
-    return JSON.parse(cleaned);
-  } catch (err) {
-    return null;
-  }
-}
-
-function writeJsonFile(filePath, data) {
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2) + '\n', 'utf-8');
 }
 
 function installPlugin() {
