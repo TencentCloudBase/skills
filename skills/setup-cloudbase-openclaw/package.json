@@ -1,11 +1,11 @@
 {
   "name": "@cloudbase/setup-openclaw",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Configure Moltbot/OpenClaw for CloudBase full-stack development and copy app templates",
   "type": "module",
   "main": "SKILL.md",
   "bin": {
-    "setup-cloudbase-openclaw": "./setup-cloudbase-openclaw.js"
+    "setup-openclaw": "./setup-cloudbase-openclaw.cjs"
   },
   "files": [
     "SKILL.md",
@@ -13,7 +13,7 @@
     "references",
     "scripts",
     "plugins",
-    "setup-cloudbase-openclaw.js"
+    "setup-cloudbase-openclaw.cjs"
   ],
   "scripts": {
     "detect": "node scripts/setup.mjs detect",
@@ -40,7 +40,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tencentcloudbase/skills"
+    "url": "git+https://github.com/tencentcloudbase/skills.git"
   },
   "author": "Tencent CloudBase",
   "license": "MIT",
