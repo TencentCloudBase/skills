@@ -8,7 +8,7 @@ These skills are sourced from: `config/.claude/skills/` in the CloudBase AI Tool
 
 **Repository**: [TencentCloudBase/CloudBase-AI-ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 
-**Last Updated**: 2026-01-30
+**Last Updated**: 2026-02-10
 
 ## Usage
 
@@ -39,7 +39,7 @@ cp -r skills/auth-tool .cursor/skills/
 
 ## Available Skills
 
-This repository contains 22 skills:
+This repository contains 23 skills:
 
 - **ai-model-nodejs** (ai-model-nodejs)
   Use this skill when developing Node.js backend services or CloudBase cloud functions (Express/Koa/NestJS, serverless, backend APIs) that need AI capabilities. Features text generation (generateText), streaming (streamText), AND image generation (generateImage) via @cloudbase/node-sdk ≥3.16.0. Built-in models include Hunyuan (hunyuan-2.0-instruct-20251111 recommended), DeepSeek (deepseek-v3.2 recommended), and hunyuan-image for images. This is the ONLY SDK that supports image generation. NOT for browser/Web apps (use ai-model-web) or WeChat Mini Program (use ai-model-wechat).
@@ -67,6 +67,9 @@ This repository contains 22 skills:
 
 - **cloud-storage-web** (cloud-storage-web)
   Complete guide for CloudBase cloud storage using Web SDK (@cloudbase/js-sdk) - upload, download, temporary URLs, file management, and best practices.
+
+- **cloudbase-agent-ts** (cloudbase-agent-ts)
+  Build and deploy AI agents with Cloudbase Agent (TypeScript), a TypeScript SDK implementing the AG-UI protocol. Use when: (1) deploying agent servers with @cloudbase/agent-server, (2) using LangGraph adapter with ClientStateAnnotation, (3) using LangChain adapter with clientTools(), (4) building custom adapters that implement AbstractAgent, (5) understanding AG-UI protocol events, (6) building web UI clients with @ag-ui/client, (7) building WeChat Mini Program UIs with @cloudbase/agent-ui-miniprogram.
 
 - **cloudbase-platform** (cloudbase-platform)
   CloudBase platform knowledge and best practices. Use this skill for general CloudBase platform understanding, including storage, hosting, authentication, cloud functions, database permissions, and data models.
