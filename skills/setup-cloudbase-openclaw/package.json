@@ -1,0 +1,53 @@
+{
+  "name": "@cloudbase/setup-openclaw",
+  "version": "1.1.0",
+  "description": "Configure Moltbot/OpenClaw for CloudBase full-stack development and copy app templates",
+  "type": "module",
+  "main": "SKILL.md",
+  "bin": {
+    "setup-cloudbase-openclaw": "./setup-cloudbase-openclaw.js"
+  },
+  "files": [
+    "SKILL.md",
+    "README.md",
+    "references",
+    "scripts",
+    "plugins",
+    "setup-cloudbase-openclaw.js"
+  ],
+  "scripts": {
+    "detect": "node scripts/setup.mjs detect",
+    "detect:bash": "bash scripts/detect-setup.sh detect",
+    "copy-template": "node scripts/setup.mjs copy-template",
+    "copy-template:bash": "bash scripts/detect-setup.sh copy-template",
+    "install-plugin": "node scripts/setup.mjs install-plugin",
+    "test": "node scripts/test-env.mjs"
+  },
+  "keywords": [
+    "cloudbase",
+    "tencent",
+    "openclaw",
+    "moltbot",
+    "mcp",
+    "setup",
+    "configuration",
+    "template",
+    "react"
+  ],
+  "skill": {
+    "name": "setup-cloudbase-openclaw",
+    "description": "Configure Moltbot/OpenClaw for CloudBase full-stack development. Checks ~/.openclaw/ or ~/.clawdbot/ config, finds workspace directory, updates AGENTS.md, configures mcporter with CloudBase MCP, and copies app templates to workspace. Guides users to get environment ID and API keys."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tencentcloudbase/skills"
+  },
+  "author": "Tencent CloudBase",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
