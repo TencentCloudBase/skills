@@ -8,7 +8,7 @@ These skills are sourced from: `config/.claude/skills/` in the CloudBase AI Tool
 
 **Repository**: [TencentCloudBase/CloudBase-AI-ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 
-**Last Updated**: 2026-02-25
+**Last Updated**: 2026-03-05
 
 ## Usage
 
@@ -63,7 +63,7 @@ This repository contains 23 skills:
   Complete guide for WeChat Mini Program authentication with CloudBase - native login, user identity, and cloud function integration.
 
 - **cloud-functions** (cloud-functions)
-  Complete guide for CloudBase cloud functions development - runtime selection, deployment, logging, invocation, and HTTP access configuration.
+  Complete guide for CloudBase cloud functions development - supports both Event Functions (Node.js) and HTTP Functions (multi-language Web services). Covers runtime selection, deployment, logging, invocation, scf_bootstrap, SSE, WebSocket, and HTTP access configuration.
 
 - **cloud-storage-web** (cloud-storage-web)
   Complete guide for CloudBase cloud storage using Web SDK (@cloudbase/js-sdk) - upload, download, temporary URLs, file management, and best practices.
