@@ -48,36 +48,34 @@ mcpServers:
 
 ### Using mcporter (CLI) When MCP Is Not Available
 
-In environments that do not support MCP (e.g. moltbot) or when users are unsure how to configure MCP, use **mcporter** as a CLI to call MCP tools. **Confirm with the user** that Secret ID, Secret Key, and Env ID are set in the mcporter config.
+In environments that do not support MCP (e.g. moltbot) or when users are unsure how to configure MCP, use **mcporter** as a CLI to call CloudBase MCP tools.
 
-**Config:** Default `./config/mcporter.json` (override with `--config`). Prefer `--output json` for machine-readable results.
+You **do not need to hard-code Secret ID / Secret Key / Env ID** in the config.  
+CloudBase MCP will support device-code based login via the `auth` tool, so credentials can be obtained interactively instead of being stored in config.
 
-```json
-{
-  "mcpServers": {
-    "cloudbase-mcp": {
-      "description": "CloudBase MCP",
-      "command": "npx",
-      "args": ["@cloudbase/cloudbase-mcp@latest"],
-      "env": {
-        "TENCENTCLOUD_SECRETID": "<your_secret_id>",
-        "TENCENTCLOUD_SECRETKEY": "<your_secret_key>",
-        "CLOUDBASE_ENV_ID": "<your_env_id>"
-      }
-    }
-  }
-}
+**Add CloudBase MCP server (recommended):**
+
+```bash
+npx mcporter config add cloudbase \
+  --command "npx" \
+  --arg "@cloudbase/cloudbase-mcp@latest" \
+  --description "CloudBase MCP"
 ```
 
 **Quick start:**
-- `mcporter list` — list servers/tools
-- `mcporter list <server> --schema` — show tool schema
-- `mcporter call <server.tool> key=value` — call a tool
+- `npx mcporter list` — list configured servers
+- `npx mcporter describe cloudbase` — inspect CloudBase server config and available tools
+- `npx mcporter list cloudbase --schema` — get full JSON schema for all CloudBase tools
+- `npx mcporter call cloudbase.help --output json` — discover available CloudBase tools and their schemas
+- `npx mcporter call cloudbase.<tool> key=value` — call a CloudBase tool
 
-**Call examples:**
-- Selector: `mcporter call linear.list_issues team=ENG limit:5`
-- Function syntax: `mcporter call "linear.create_issue(title: \"Bug\")"`
-- JSON payload: `mcporter call <server.tool> --args '{"limit":5}'`
+**Call examples (CloudBase auth):**
+- Check auth & env status:  
+  `npx mcporter call cloudbase.auth action=status --output json`
+- Start device-flow login (future-friendly device-code login; no keys in config):  
+  `npx mcporter call cloudbase.auth action=start_auth authMode=device --output json`
+- Bind environment after login (envId from CloudBase console):  
+  `npx mcporter call cloudbase.auth action=set_env envId=env-xxx --output json`
 
 ---
 

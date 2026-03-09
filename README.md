@@ -8,7 +8,7 @@ These skills are sourced from: `config/.claude/skills/` in the CloudBase AI Tool
 
 **Repository**: [TencentCloudBase/CloudBase-AI-ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 
-**Last Updated**: 2026-03-05
+**Last Updated**: 2026-03-09
 
 ## Usage
 
