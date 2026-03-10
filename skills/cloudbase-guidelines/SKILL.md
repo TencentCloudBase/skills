@@ -50,6 +50,8 @@ mcpServers:
 
 In environments that do not support MCP (e.g. moltbot) or when users are unsure how to configure MCP, use **mcporter** as a CLI to call CloudBase MCP tools.
 
+**When managing or deploying CloudBase, you MUST use MCP and MUST understand tool details first.** Before calling any CloudBase tool, run `npx mcporter describe cloudbase` (or equivalent in your IDE) to inspect the server config and available tools.
+
 You **do not need to hard-code Secret ID / Secret Key / Env ID** in the config.  
 CloudBase MCP will support device-code based login via the `auth` tool, so credentials can be obtained interactively instead of being stored in config.
 
@@ -64,7 +66,7 @@ npx mcporter config add cloudbase \
 
 **Quick start:**
 - `npx mcporter list` — list configured servers
-- `npx mcporter describe cloudbase` — inspect CloudBase server config and available tools
+- **Required:** `npx mcporter describe cloudbase` — inspect CloudBase server config and available tools (must run before managing/deploying CloudBase)
 - `npx mcporter list cloudbase --schema` — get full JSON schema for all CloudBase tools
 - `npx mcporter call cloudbase.help --output json` — discover available CloudBase tools and their schemas
 - `npx mcporter call cloudbase.<tool> key=value` — call a CloudBase tool
