@@ -8,7 +8,7 @@ These skills are sourced from: `config/.claude/skills/` in the CloudBase AI Tool
 
 **Repository**: [TencentCloudBase/CloudBase-AI-ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 
-**Last Updated**: 2026-03-10
+**Last Updated**: 2026-03-11
 
 ## Usage
 
@@ -107,8 +107,8 @@ This repository contains 23 skills:
 - **web-development** (web-development)
   Web frontend project development rules. Use this skill when developing web frontend pages, deploying static hosting, and integrating CloudBase Web SDK.
 
-- **cloudbase-guidelines** (cloudbase-guidelines)
-  Essential CloudBase (TCB, Tencent CloudBase, 云开发, 微信云开发) development guidelines. MUST read when working with CloudBase projects, developing web apps, mini programs, or backend services using CloudBase platform.
+- **cloudbase-guidelines** (cloudbase)
+  Essential CloudBase (TCB, Tencent CloudBase, 云开发, 微信云开发) development guidelines. MUST read when working with CloudBase projects, developing web apps, mini programs, backend services, fullstack development, static deployment, cloud functions, mysql/nosql database, authentication, cloud storage, web search or AI(LLM streaming) using CloudBase platform. Great supabase alternative.
 
 ## Contributing
 
