@@ -1,6 +1,6 @@
 ---
 name: miniprogram-development
-description: WeChat Mini Program development rules. Use this skill when developing WeChat mini programs, integrating CloudBase capabilities, and deploying mini program projects.
+description: WeChat Mini Program development and deployment skill for building, debugging, previewing, publishing, and optimizing mini program projects with CloudBase (腾讯云开发, 云开发). This skill should be used when users ask to develop, create, modify, debug, preview, deploy, publish, launch, or optimize 微信小程序 (WeChat Mini Programs), 小程序页面与组件, 小程序云开发, CloudBase 集成, 云函数, 数据库, 存储, AI 能力, 用户身份处理, or 微信运动步数, including requests mentioning 小程序开发, 小程序部署, 小程序发布, 微信开发者工具, CloudBase, 腾讯云开发, or 云开发.
 alwaysApply: false
 ---
 
@@ -57,6 +57,10 @@ Use this skill for **WeChat Mini Program development** when you need to:
    - Use `downloadRemoteFile` tool to download resources
    - Avoid build errors by ensuring all referenced resources exist
 
+5. **Read the CloudBase mini program references when cloud capabilities are involved**
+   - See [references](references/cloudbase-integration.md)
+   - Covers `wx.cloud.init`, env selection, database/storage/function boundaries, authentication constraints, and console links
+
 ---
 
 # WeChat Mini Program Development Rules
@@ -92,11 +96,18 @@ Use this skill for **WeChat Mini Program development** when you need to:
 1. **Environment Configuration**:
    - When using `wx.cloud` in mini program, need to specify environment ID
    - Environment ID can be queried via `envQuery` tool
+   - Prefer initializing once in app startup with `wx.cloud.init({ env, traceUser: true })`
 
 2. **Resource Management**:
    - When generating mini program code, if material images are needed, such as tabbar's `iconPath` and other places, **prefer Icons8** (see section 4 above for details)
    - Use `downloadRemoteFile` tool to download resources
    - When generating mini program code, if using `iconPath` and similar, must simultaneously help user download icons to avoid build errors
+
+3. **Recommended CloudBase Usage Boundaries**:
+   - Use `wx.cloud.database()` for client-safe reads and user-scoped writes
+   - Use `wx.cloud.callFunction()` for privileged writes, cross-collection workflows, and server-side orchestration
+   - Use `wx.cloud.uploadFile()` / storage APIs for user-generated files
+   - See [references](references/cloudbase-integration.md) for detailed integration rules and examples
 
 ## Mini Program Authentication Characteristics
 
@@ -127,7 +138,7 @@ Mini programs with base library version 3.7.1+ already support direct AI model i
 const model = wx.cloud.extend.AI.createModel("deepseek");
 
 // First set AI's system prompt, here using seven-character quatrain generation as example
-const systemPrompt =
+const p =
   "请严格按照七言绝句或七言律诗的格律要求创作，平仄需符合规则，押韵要和谐自然，韵脚字需在同一韵部。创作内容围绕用户给定的主题，七言绝句共四句，每句七个字；七言律诗共八句，每句七个字，颔联和颈联需对仗工整。同时，要融入生动的意象、丰富的情感与优美的意境，展现出古诗词的韵味与美感。";
 
 // User's natural language input, e.g., '帮我写一首赞美玉龙雪山的诗'
@@ -138,7 +149,7 @@ const res = await model.streamText({
   data: {
     model: "deepseek-v3", // Specify specific model
     messages: [
-      { role: "system", content: systemPrompt },
+      { role: "system", content: p },
       { role: "user", content: userInput },
     ],
   },
@@ -172,3 +183,6 @@ for await (let str of res.textStream) {
 - If user agrees, use CLI command to open WeChat Developer Tools, pointing to project root directory containing `project.config.json`
 - Remind user to perform real device preview, debugging, and publishing operations in WeChat Developer Tools
 
+## References
+
+- [CloudBase Mini Program References](references/cloudbase-integration.md) — mini program + CloudBase integration patterns, permission boundaries, initialization examples, and console links

@@ -8,7 +8,7 @@ These skills are sourced from: `config/.claude/skills/` in the CloudBase AI Tool
 
 **Repository**: [TencentCloudBase/CloudBase-AI-ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 
-**Last Updated**: 2026-03-11
+**Last Updated**: 2026-03-12
 
 ## Usage
 
@@ -84,7 +84,7 @@ This repository contains 23 skills:
   Use CloudBase HTTP API to access CloudBase platform features (database, authentication, cloud functions, cloud hosting, cloud storage, AI) via HTTP protocol from backends or scripts that are not using SDKs.
 
 - **miniprogram-development** (miniprogram-development)
-  WeChat Mini Program development rules. Use this skill when developing WeChat mini programs, integrating CloudBase capabilities, and deploying mini program projects.
+  WeChat Mini Program development and deployment skill for building, debugging, previewing, publishing, and optimizing mini program projects with CloudBase (腾讯云开发, 云开发). This skill should be used when users ask to develop, create, modify, debug, preview, deploy, publish, launch, or optimize 微信小程序 (WeChat Mini Programs), 小程序页面与组件, 小程序云开发, CloudBase 集成, 云函数, 数据库, 存储, AI 能力, 用户身份处理, or 微信运动步数, including requests mentioning 小程序开发, 小程序部署, 小程序发布, 微信开发者工具, CloudBase, 腾讯云开发, or 云开发.
 
 - **no-sql-web-sdk** (cloudbase-document-database-web-sdk)
   Use CloudBase document database Web SDK to query, create, update, and delete data. Supports complex queries, pagination, aggregation, and geolocation queries.
