@@ -84,7 +84,7 @@ This repository contains 23 skills:
   Use CloudBase HTTP API to access CloudBase platform features (database, authentication, cloud functions, cloud hosting, cloud storage, AI) via HTTP protocol from backends or scripts that are not using SDKs.
 
 - **miniprogram-development** (miniprogram-development)
-  WeChat Mini Program development and deployment skill for building, debugging, previewing, publishing, and optimizing mini program projects with CloudBase (腾讯云开发, 云开发). This skill should be used when users ask to develop, create, modify, debug, preview, deploy, publish, launch, or optimize 微信小程序 (WeChat Mini Programs), 小程序页面与组件, 小程序云开发, CloudBase 集成, 云函数, 数据库, 存储, AI 能力, 用户身份处理, or 微信运动步数, including requests mentioning 小程序开发, 小程序部署, 小程序发布, 微信开发者工具, CloudBase, 腾讯云开发, or 云开发.
+  WeChat Mini Program development skill for building, debugging, previewing, testing, publishing, and optimizing mini program projects. This skill should be used when users ask to create, develop, modify, debug, preview, test, deploy, publish, launch, review, or optimize WeChat Mini Programs, mini program pages, components, routing, project structure, project configuration, project.config.json, appid setup, device preview, real-device validation, WeChat Developer Tools workflows, miniprogram-ci preview/upload flows, or mini program release processes. It should also be used when users explicitly mention CloudBase, wx.cloud, Tencent CloudBase, 腾讯云开发, or 云开发 in a mini program project.
 
 - **no-sql-web-sdk** (cloudbase-document-database-web-sdk)
   Use CloudBase document database Web SDK to query, create, update, and delete data. Supports complex queries, pagination, aggregation, and geolocation queries.
