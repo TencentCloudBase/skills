@@ -2,6 +2,45 @@
 
 This document supplements `SKILL.md` with practical **WeChat Mini Program + CloudBase** integration guidance.
 
+## How to use this reference (for a coding agent)
+
+1. **Understand platform differences**
+   - WeChat Mini Program and Web have completely different authentication approaches.
+   - Must strictly distinguish between platforms.
+   - Never mix Web authentication methods into mini program projects.
+   - Mini programs with CloudBase are naturally login-free.
+
+2. **Follow CloudBase best practices**
+   - Use `wx.cloud` APIs on the mini program client side.
+   - Configure appropriate database permissions before relying on client writes.
+   - Prefer cloud functions for cross-collection operations and privileged writes.
+   - Use `OPENID` from `cloud.getWXContext()` as the stable user identifier on the server side.
+
+3. **Use correct SDKs and APIs**
+   - Mini program client code should use `wx.cloud.database()`, `wx.cloud.callFunction()`, and `wx.cloud.uploadFile()` as appropriate.
+   - Do not use Web SDK authentication patterns in mini programs.
+   - Use `envQuery` to get environment ID when available.
+
+4. **Use CloudBase MCP via mcporter (CLI) when IDE MCP is not available**
+   - You do **not** need to hard-code Secret ID / Secret Key / Env ID in config.
+   - CloudBase MCP supports device-code login via the `auth` tool, so credentials can be obtained interactively.
+   - Add CloudBase MCP server:
+     ```bash
+     npx mcporter config add cloudbase \
+       --command "npx" \
+       --arg "@cloudbase/cloudbase-mcp@latest" \
+       --description "CloudBase MCP"
+     ```
+   - Discover tools and schemas:
+     - `npx mcporter list` — list configured servers
+     - `npx mcporter describe cloudbase` — inspect CloudBase server config and available tools
+     - `npx mcporter list cloudbase --schema` — get full JSON schema for all CloudBase tools
+     - `npx mcporter call cloudbase.help --output json` — discover available CloudBase tools and their schemas
+   - Call CloudBase tools (auth flow examples):
+     - `npx mcporter call cloudbase.auth action=status --output json`
+     - `npx mcporter call cloudbase.auth action=start_auth authMode=device --output json`
+     - `npx mcporter call cloudbase.auth action=set_env envId=env-xxx --output json`
+
 ## 1. Environment Initialization
 
 Mini programs using CloudBase should initialize `wx.cloud` once during app startup.

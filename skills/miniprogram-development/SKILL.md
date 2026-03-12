@@ -59,7 +59,7 @@ Use this skill for **WeChat Mini Program development** when you need to:
 
 5. **Read the CloudBase mini program references when cloud capabilities are involved**
    - See [references](references/cloudbase-integration.md)
-   - Covers `wx.cloud.init`, env selection, database/storage/function boundaries, authentication constraints, and console links
+   - Covers `wx.cloud.init`, env selection, agent usage checklist, mcporter fallback, database/storage/function boundaries, authentication constraints, and console links
 
 ---
 
