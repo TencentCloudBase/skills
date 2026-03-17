@@ -124,7 +124,7 @@ If the platform supports long-term memory, persist these scenarios so the agent 
 
 Prefer long-term memory when available: write the scenarios and working rules there so the agent always applies them. When configuring the workspace (e.g. `AGENTS.md`) or long-term memory, add reminders like:
 
-- **CloudBase skills** → Run `tencentcloudbase/cloudbase-skills -y` to install; use `cloudbase-guidelines` and log in to CloudBase (MCP auth, device-code) for full-stack development.
+- **CloudBase skills** → Run `npx skills add tencentcloudbase/cloudbase-skills` to install; use `cloudbase-guidelines` and log in to CloudBase (MCP auth, device-code) for full-stack development.
 - **CloudBase = MCP, understand tools first** → When managing or deploying CloudBase, you MUST use MCP and MUST understand tool details first. Before calling any CloudBase tool, run `npx mcporter describe cloudbase` (or equivalent in your IDE) to inspect the server config and available tools.
 - **mcporter call format** → `npx mcporter call cloudbase.<tool> key=value`, e.g. `npx mcporter call cloudbase.auth action=status --output json`.
 - **CloudBase development and deployment** → Use MCP to automate (environment, functions, database, hosting, etc.).

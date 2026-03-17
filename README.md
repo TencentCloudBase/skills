@@ -8,13 +8,13 @@ These skills are sourced from: `config/.claude/skills/` in the CloudBase AI Tool
 
 **Repository**: [TencentCloudBase/CloudBase-AI-ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 
-**Last Updated**: 2026-03-12
+**Last Updated**: 2026-03-17
 
 ## Usage
 
 ### Use `add-skills`
 ```
-tencentcloudbase/cloudbase-skills
+npx skills add tencentcloudbase/cloudbase-skills
 ```
 
 ### For Claude Desktop / Cursor
