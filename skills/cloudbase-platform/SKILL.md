@@ -49,7 +49,7 @@ Use this skill for **CloudBase platform knowledge** when you need to:
      ```
    - Discover tools and schemas:
      - `npx mcporter list` — list configured servers
-     - `npx mcporter describe cloudbase` — inspect CloudBase server config and available tools
+     - `npx mcporter describe cloudbase --all-parameters` — inspect CloudBase server config and get full tool schemas with all parameters (⚠️ **必须加 `--all-parameters` 才能获取完整参数信息**)
      - `npx mcporter list cloudbase --schema` — get full JSON schema for all CloudBase tools
      - `npx mcporter call cloudbase.help --output json` — discover available CloudBase tools and their schemas
    - Call CloudBase tools (auth flow examples):

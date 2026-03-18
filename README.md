@@ -4,11 +4,11 @@ This repository contains agent skills for CloudBase development, extracted from 
 
 ## Source
 
-These skills are sourced from: `config/.claude/skills/` in the CloudBase AI ToolKit repository.
+These skills are sourced from: `config/source/skills/` in the CloudBase AI ToolKit repository.
 
 **Repository**: [TencentCloudBase/CloudBase-AI-ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 
-**Last Updated**: 2026-03-17
+**Last Updated**: 2026-03-18
 
 ## Usage
 
@@ -31,10 +31,10 @@ To use the `auth-tool` skill:
 
 ```bash
 # For Claude Desktop
-cp -r skills/auth-tool ~/.config/claude/skills/
+cp -r config/source/skills/auth-tool ~/.config/claude/skills/
 
 # For Cursor
-cp -r skills/auth-tool .cursor/skills/
+cp -r config/source/skills/auth-tool .cursor/skills/
 ```
 
 ## Available Skills
@@ -115,7 +115,7 @@ This repository contains 23 skills:
 These skills are maintained in the main [CloudBase AI ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit) repository. To contribute:
 
 1. Fork the [CloudBase AI ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit) repository
-2. Make your changes in `config/.claude/skills/`
+2. Make your changes in `config/source/skills/`
 3. Submit a pull request
 
 ## License
