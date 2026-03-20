@@ -45,30 +45,55 @@ Configure CloudBase authentication providers: Anonymous, Username/Password, SMS,
 
 ## Authentication Scenarios
 
-### 1. Get Login Strategy
+### 1. Get Login Config
+
+Use the official login-config API. Do **not** use `lowcode/DescribeLoginStrategy` or `lowcode/ModifyLoginStrategy` as the default path.
 
 Query current login configuration:
 ```js
 {
     "params": { "EnvId": `env` },
-    "service": "lowcode",
-    "action": "DescribeLoginStrategy"
+    "service": "tcb",
+    "action": "DescribeLoginConfig"
 }
 ```
-Returns `LoginStrategy` object or `false` if not configured.
+
+The response contains fields such as:
+
+- `AnonymousLogin`
+- `UserNameLogin`
+- `PhoneNumberLogin`
+- `EmailLogin`
+- `SmsVerificationConfig`
+- `MfaConfig`
+- `PwdUpdateStrategy`
+
+Before calling `ModifyLoginConfig`, rebuild the payload from writable keys only. Do **not** spread the full response object back into the request.
+
+```js
+const WritableLoginConfig = {
+    "PhoneNumberLogin": LoginConfig.PhoneNumberLogin,
+    "EmailLogin": LoginConfig.EmailLogin,
+    "UserNameLogin": LoginConfig.UserNameLogin,
+    "AnonymousLogin": LoginConfig.AnonymousLogin,
+    ...(LoginConfig.SmsVerificationConfig ? { "SmsVerificationConfig": LoginConfig.SmsVerificationConfig } : {}),
+    ...(LoginConfig.MfaConfig ? { "MfaConfig": LoginConfig.MfaConfig } : {}),
+    ...(LoginConfig.PwdUpdateStrategy ? { "PwdUpdateStrategy": LoginConfig.PwdUpdateStrategy } : {})
+}
+```
 
 ---
 
 ### 2. Anonymous Login
 
-1. Get `LoginStrategy` (see Scenario 1)
-2. Set `LoginStrategy.AnonymousLogin = true` (on) or `false` (off)
+1. Get `LoginConfig` (see Scenario 1)
+2. Set `LoginConfig.AnonymousLogin = true` (on) or `false` (off)
 3. Update:
 ```js
 {
-    "params": { "EnvId": `env`, ...LoginStrategy },
-    "service": "lowcode",
-    "action": "ModifyLoginStrategy"
+    "params": { "EnvId": `env`, ...WritableLoginConfig, "AnonymousLogin": true },
+    "service": "tcb",
+    "action": "ModifyLoginConfig"
 }
 ```
 
@@ -76,14 +101,14 @@ Returns `LoginStrategy` object or `false` if not configured.
 
 ### 3. Username/Password Login
 
-1. Get `LoginStrategy` (see Scenario 1)
-2. Set `LoginStrategy.UserNameLogin = true` (on) or `false` (off)
+1. Get `LoginConfig` (see Scenario 1)
+2. Set `LoginConfig.UserNameLogin = true` (on) or `false` (off)
 3. Update:
 ```js
 {
-    "params": { "EnvId": `env`, ...LoginStrategy },
-    "service": "lowcode",
-    "action": "ModifyLoginStrategy"
+    "params": { "EnvId": `env`, ...WritableLoginConfig, "UserNameLogin": true },
+    "service": "tcb",
+    "action": "ModifyLoginConfig"
 }
 ```
 
@@ -91,24 +116,52 @@ Returns `LoginStrategy` object or `false` if not configured.
 
 ### 4. SMS Login
 
-1. Get `LoginStrategy` (see Scenario 1)
+1. Get `LoginConfig` (see Scenario 1)
 2. Modify:
-   - **Turn on**: `LoginStrategy.PhoneNumberLogin = true`
-   - **Turn off**: `LoginStrategy.PhoneNumberLogin = false`
+   - **Turn on**: `LoginConfig.PhoneNumberLogin = true`
+   - **Turn off**: `LoginConfig.PhoneNumberLogin = false`
    - **Config** (optional):
      ```js
-     LoginStrategy.SmsVerificationConfig = {
+     LoginConfig.SmsVerificationConfig = {
          Type: 'default',      // 'default' or 'apis'
-         Method: 'methodName',
+         Name: 'method_53978f9f96a35', // required when Type = 'apis'
+         Method: 'SendVerificationCode',
          SmsDayLimit: 30       // -1 = unlimited
      }
      ```
 3. Update:
 ```js
 {
-    "params": { "EnvId": `env`, ...LoginStrategy },
-    "service": "lowcode",
-    "action": "ModifyLoginStrategy"
+    "params": {
+        "EnvId": `env`,
+        ...WritableLoginConfig,
+        "PhoneNumberLogin": true,
+        "SmsVerificationConfig": {
+            "Type": "default",
+            "SmsDayLimit": 30
+        }
+    },
+    "service": "tcb",
+    "action": "ModifyLoginConfig"
+}
+```
+
+**Use custom apis to send SMS**:
+```js
+{
+    "params": {
+        "EnvId": `env`,
+        ...WritableLoginConfig,
+        "PhoneNumberLogin": true,
+        "SmsVerificationConfig": {
+            "Type": "apis",
+            "Name": "method_53978f9f96a35",
+            "Method": "SendVerificationCode",
+            "SmsDayLimit": 20
+        }
+    },
+    "service": "tcb",
+    "action": "ModifyLoginConfig"
 }
 ```
 
@@ -116,7 +169,30 @@ Returns `LoginStrategy` object or `false` if not configured.
 
 ### 5. Email Login
 
-**Turn on (Tencent Cloud email)**:
+Email has two layers of configuration:
+
+- `ModifyLoginConfig.EmailLogin`: controls whether email/password login is enabled
+- `ModifyProvider(Id="email")`: controls the email sender channel and SMTP configuration
+
+**Turn on email/password login**:
+```js
+{
+    "params": { "EnvId": `env`, ...WritableLoginConfig, "EmailLogin": true },
+    "service": "tcb",
+    "action": "ModifyLoginConfig"
+}
+```
+
+**Turn off email/password login**:
+```js
+{
+    "params": { "EnvId": `env`, ...WritableLoginConfig, "EmailLogin": false },
+    "service": "tcb",
+    "action": "ModifyLoginConfig"
+}
+```
+
+**Configure email provider (Tencent Cloud email)**:
 ```js
 {
     "params": {
@@ -130,7 +206,7 @@ Returns `LoginStrategy` object or `false` if not configured.
 }
 ```
 
-**Turn off**:
+**Disable email provider**:
 ```js
 {
     "params": { "EnvId": `env`, "Id": "email", "On": "FALSE" },
@@ -139,7 +215,7 @@ Returns `LoginStrategy` object or `false` if not configured.
 }
 ```
 
-**Turn on (custom SMTP)**:
+**Configure email provider (custom SMTP)**:
 ```js
 {
     "params": {
@@ -251,7 +327,35 @@ Save `result.Data.StaticDomain` as `staticDomain`.
 }
 ```
 
-### 8. Get Publishable Key
+### 8. Client Configuration Boundary
+
+Use client APIs for client metadata and token/session settings. Do not use them as a replacement for login strategy or provider management.
+
+**Query client config**:
+```js
+{
+    "params": { "EnvId": `env`, "Id": `env` },
+    "service": "tcb",
+    "action": "DescribeClient"
+}
+```
+
+**Update client config**:
+```js
+{
+    "params": {
+        "EnvId": `env`,
+        "Id": `env`,
+        "AccessTokenExpiresIn": 7200,
+        "RefreshTokenExpiresIn": 2592000,
+        "MaxDevice": 3
+    },
+    "service": "tcb",
+    "action": "ModifyClient"
+}
+```
+
+### 9. Get Publishable Key
 
 **Query existing key**:
 ```js
