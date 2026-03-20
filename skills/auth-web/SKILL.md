@@ -40,7 +40,9 @@ alwaysApply: false
 
 **Use Case**: Web frontend projects using `@cloudbase/js-sdk@2.24.0+` for user authentication  
 **Key Benefits**: Compatible with `supabase-js` API, supports phone, email, anonymous, username/password, and third-party login methods
-**`@cloudbase/js-sdk` cdn source**: `https://static.cloudbase.net/cloudbase-js-sdk/latest/cloudbase.full.js`
+**Official `@cloudbase/js-sdk` CDN**: `https://static.cloudbase.net/cloudbase-js-sdk/latest/cloudbase.full.js`
+
+Use the same CDN address as `web-development`. Prefer npm installation in modern bundler projects, and use the CDN form for static HTML, no-build demos, or low-friction examples.
 
 ## Prerequisites
 

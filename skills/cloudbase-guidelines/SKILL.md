@@ -35,6 +35,13 @@ Read this section first. The routing contract uses stable skill identifiers such
 - Native App failures are usually caused by reading Web SDK paths, not by missing HTTP API knowledge.
 - Mini program failures are usually caused by treating `wx.cloud` like Web auth or Web SDK.
 
+### Web SDK quick reminder
+
+- In CloudBase Web + BaaS scenarios, surface the official Web SDK CDN early: `https://static.cloudbase.net/cloudbase-js-sdk/latest/cloudbase.full.js`
+- For React, Vue, Vite, Webpack, and other modern frontend projects, prefer `npm install @cloudbase/js-sdk`
+- For static HTML, no-build demos, README snippets, or low-friction prototypes, the CDN form is acceptable
+- Read `web-development` first for Web SDK integration, then `auth-web` when login or session handling is involved
+
 ## 💡 Recommended: MCP Installation
 
 **For enhanced CloudBase development experience, we recommend installing CloudBase MCP (Model Context Protocol).**
@@ -180,6 +187,9 @@ Prefer long-term memory when available: write the scenarios and working rules th
    - NoSQL: `no-sql-web-sdk` skill
    - MySQL: `relational-database-web` and `relational-database-tool` skills
 4. **UI Design** (Recommended): Read the `ui-design` skill for better UI/UX design guidelines
+5. **Quick SDK reference**:
+   - npm / bundler projects: `npm install @cloudbase/js-sdk`
+   - static page / CDN: `https://static.cloudbase.net/cloudbase-js-sdk/latest/cloudbase.full.js`
 
 ### When Developing a Mini Program Project:
 1. **Platform**: Read the `miniprogram-development` skill for project structure, WeChat Developer Tools, and wx.cloud usage
