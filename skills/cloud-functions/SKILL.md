@@ -6,6 +6,37 @@ alwaysApply: false
 
 # Cloud Functions Development
 
+## Activation Contract
+
+### Use this first when
+
+- The task is to create, update, deploy, inspect, or debug a CloudBase Event Function or HTTP Function.
+
+### Read before writing code if
+
+- The request mentions runtime, HTTP function, `scf_bootstrap`, function logs, or function deployment.
+
+### Then also read
+
+- Auth setup or provider-related backend work -> `../auth-tool/SKILL.md`
+- AI in functions -> `../ai-model-nodejs/SKILL.md`
+
+### Do NOT use for
+
+- CloudRun container services or Web authentication UI implementation.
+
+### Common mistakes / gotchas
+
+- Picking the wrong function type and trying to compensate later.
+- Forgetting that runtime cannot be changed after creation.
+- Using cloud functions as the first solution for Web login.
+
+### Minimal checklist
+
+- Read [Cloud Functions Execution Checklist](checklist.md) before deployment or runtime changes.
+
+## Overview
+
 Use this skill when developing, deploying, and managing CloudBase cloud functions. CloudBase supports two types of cloud functions:
 
 - **Event Functions (普通云函数)**: Traditional serverless functions triggered by events (SDK calls, timers)
