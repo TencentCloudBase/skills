@@ -93,7 +93,7 @@ This repository contains 23 skills:
   Use CloudBase document database WeChat MiniProgram SDK to query, create, update, and delete data. Supports complex queries, pagination, aggregation, and geolocation queries.
 
 - **relational-database-tool** (relational-database-mcp-cloudbase)
-  This is the required documentation for agents operating on the CloudBase Relational Database. It lists the only four supported tools for running SQL and managing security rules. Read the full content to understand why you must NOT use standard Application SDKs and how to safely execute INSERT, UPDATE, or DELETE operations without corrupting production data.
+  This is the required documentation for agents operating on the CloudBase Relational Database through MCP. It defines the canonical SQL management flow with `querySqlDatabase`, `manageSqlDatabase`, `readSecurityRule`, and `writeSecurityRule`, including MySQL provisioning, destroy flow, async status checks, safe query execution, schema initialization, and security rule updates.
 
 - **relational-database-web** (relational-database-web-cloudbase)
   Use when building frontend Web apps that talk to CloudBase Relational Database via @cloudbase/js-sdk – provides the canonical init pattern so you can then use Supabase-style queries from the browser.
