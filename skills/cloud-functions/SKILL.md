@@ -82,7 +82,9 @@ Use this skill for **cloud function operations** when you need to:
 3. **Deploy functions correctly**
    - **Preferred MCP Tools**: Use `queryFunctions` for reads, `manageFunctions(action="createFunction")` for creation, and `manageFunctions(action="updateFunctionCode")` for code deployment
    - **Legacy compatibility**: If older prompts mention `createFunction` / `updateFunctionCode`, map them to the `manageFunctions` actions above
-   - **CLI**: Use `tcb fn deploy` (Event) or `tcb fn deploy --httpFn` (HTTP)
+   - **CLI**: Use `tcb fn deploy` (Event) or `tcb fn deploy --httpFn` (HTTP) only as a fallback when MCP tools are unavailable
+   - In agent / non-interactive runs, never default to CLI login flows for deployment; keep the flow on `manageFunctions`
+   - For HTTP functions, create or update them through `manageFunctions` with `func.type="HTTP"` as the primary path
    - HTTP Functions require `scf_bootstrap` file in the function directory
    - Provide correct `functionRootPath` (parent directory of function folder)
 
