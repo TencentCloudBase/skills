@@ -402,9 +402,15 @@ manageGateway({
   targetName: "myHttpFunction",
   type: "HTTP",           // "HTTP" for HTTP Function
   path: "/api/hello",     // Trigger path
-  // auth: false            // Optional gateway auth switch
+  // auth: false            // Optional: only set this when you intentionally need anonymous/public access
 })
 ```
+
+Notes:
+- `manageFunctions(action="createFunction")` 只创建 HTTP 云函数本身，不会默认替你创建 HTTP 访问路径。
+- 如果用户明确说“不需要配置 HTTP 访问服务”，不要额外调用 `manageGateway(action="createAccess")`。
+- 评测、浏览器或其他外部调用方可能会以匿名身份访问，而且失败后不一定会把 `EXCEED_AUTHORITY` 再反馈给 AI。只要场景涉及匿名 URL 访问，就要主动确认两件事：访问路径是否已创建，以及函数安全规则是否允许该访问方式。
+- 若外部请求已经报 `EXCEED_AUTHORITY`，先调用 `readSecurityRule(resourceType="function")` 查看当前规则，再根据实际需求决定是否用 `writeSecurityRule(resourceType="function", aclTag="CUSTOM", rule="true")` 或更细粒度规则放开权限。
 
 ```bash
 # Access via default domain
