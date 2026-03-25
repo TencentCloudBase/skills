@@ -144,6 +144,7 @@ When destroying MySQL, confirm:
    - `querySqlDatabase(action="describeCreateResult")`
    - `querySqlDatabase(action="describeTaskStatus")`
 4. Only continue when the returned lifecycle status is `READY`.
+5. For MySQL provisioning, prefer `describeCreateResult`; reserve `describeTaskStatus` for destroy flows whose task response carries `TaskName`.
 
 ### Scenario 2: Safely inspect data in a table
 
