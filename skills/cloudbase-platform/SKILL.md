@@ -75,6 +75,7 @@ Use this skill for **CloudBase platform knowledge** when you need to:
    - Generally, publicly accessible files can be stored in static hosting, which provides a public web address
    - Static hosting supports custom domain configuration (requires console operation)
    - Cloud storage is suitable for files with privacy requirements, can get temporary access addresses via temporary file URLs
+   - If the task needs COS SDK polling, file metadata lookup, or temporary URLs for an uploaded object, use cloud storage tools (`manageStorage` / `queryStorage`), not `uploadFiles`
 
 2. **Static Hosting Domain**:
    - CloudBase static hosting domain can be obtained via `getWebsiteConfig` tool
