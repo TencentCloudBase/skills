@@ -32,6 +32,10 @@ alwaysApply: false
 - Treating HTTP Access as the implementation model for HTTP Functions. HTTP Access is a gateway configuration for Event Functions, not the HTTP Function runtime model.
 - Forgetting that runtime cannot be changed after creation.
 - Using cloud functions as the first solution for Web login.
+- Forgetting that HTTP Functions do NOT auto-install dependencies — always include `node_modules`.
+- Forgetting to add `app.use(express.json())` or equivalent body parsing middleware for POST/PUT requests.
+- Leaving HTTP handlers without sending a response (causes request timeout).
+- Not returning proper HTTP status codes (400, 401, 405) for error cases.
 
 ### Minimal checklist
 
@@ -79,8 +83,11 @@ Use this skill for **cloud function operations** when you need to:
    - Must select correct runtime during initial creation
    - If runtime needs to change, must delete and recreate function
 
-3. **Deploy functions correctly**
-   - **Preferred MCP Tools**: Use `queryFunctions` for reads, `manageFunctions(action="createFunction")` for creation, and `manageFunctions(action="updateFunctionCode")` for code deployment
+3. **Write code AND deploy — do not stop after writing files**
+   - **CRITICAL**: After writing function code, you MUST also deploy it using `manageFunctions`. Creating files locally without deploying is incomplete.
+   - Use `manageFunctions(action="createFunction")` to create AND deploy in one step
+   - Provide `functionRootPath` as the **parent directory** of the function folder (e.g., `/project/cloudfunctions/` not `/project/cloudfunctions/myFunction/`)
+   - **Preferred MCP Tools**: Use `queryFunctions` for reads, `manageFunctions(action="createFunction")` for creation, and `manageFunctions(action="updateFunctionCode")` for code updates
    - **Legacy compatibility**: If older prompts mention `createFunction` / `updateFunctionCode`, map them to the `manageFunctions` actions above
    - **CLI**: Use `tcb fn deploy` (Event) or `tcb fn deploy --httpFn` (HTTP) only as a fallback when MCP tools are unavailable
    - In agent / non-interactive runs, never default to CLI login flows for deployment; keep the flow on `manageFunctions`
@@ -245,19 +252,104 @@ export PYTHONPATH="./third_party:$PYTHONPATH"
 java -jar *.jar
 ```
 
+### HTTP Function Request & Response Handling
+
+**⚠️ CRITICAL: HTTP Functions are standard web servers.** They receive full HTTP requests (method, headers, query string, body) and must return complete HTTP responses (status code, headers, body). Unlike Event Functions, there is no CloudBase-specific request envelope.
+
+**Dependencies:**
+- **HTTP Functions do NOT auto-install dependencies.** You MUST include `node_modules` in the function directory or use layers.
+- Common packages: `express`, `body-parser` (built into Express 4.16+), `cors`, `helmet`
+
+**Handling Different HTTP Methods:**
+
+```javascript
+const express = require('express');
+const app = express();
+
+// IMPORTANT: Must parse JSON body for POST/PUT requests
+app.use(express.json());
+
+// GET - read query parameters from req.query
+app.get('/users', (req, res) => {
+  const { userId, page = 1, pageSize = 10 } = req.query;
+
+  if (!userId) {
+    return res.status(400).json({ error: 'userId is required' });
+  }
+
+  res.json({
+    method: 'GET',
+    params: { userId, page: Number(page), pageSize: Number(pageSize) },
+    message: 'Query parameters processed'
+  });
+});
+
+// POST - read body from req.body, query from req.query
+app.post('/users', (req, res) => {
+  const { action } = req.query;    // query string: ?action=create
+  const { name, email } = req.body; // JSON body
+
+  if (!name || !email) {
+    return res.status(400).json({ error: 'name and email are required' });
+  }
+
+  res.json({
+    method: 'POST',
+    action,
+    data: { name, email },
+    message: 'Body and query parameters processed'
+  });
+});
+
+// PUT - read custom headers from req.headers
+app.put('/users/:id', (req, res) => {
+  const userId = req.headers['x-user-id']; // custom header
+
+  if (!userId) {
+    return res.status(401).json({ error: 'x-user-id header is required' });
+  }
+
+  const { status } = req.body;
+  res.json({
+    method: 'PUT',
+    userId,
+    status,
+    message: 'Headers and body processed'
+  });
+});
+
+// For unsupported methods, return 405
+app.all('*', (req, res) => {
+  res.status(405).json({ error: 'Method Not Allowed' });
+});
+
+app.listen(9000); // Must be port 9000
+```
+
+**Key Rules:**
+- `req.query` - URL query string parameters (e.g., `?userId=123&page=1`)
+- `req.body` - Parsed request body (requires `app.use(express.json())` or equivalent middleware)
+- `req.headers` - All HTTP headers (lowercased, e.g., `req.headers['x-user-id']`)
+- `req.params` - URL path parameters (e.g., `/users/:id`)
+- Always return proper HTTP status codes: 200 (success), 400 (bad request), 401 (unauthorized), 405 (method not allowed)
+- Always call `res.json()`, `res.send()`, or `res.status().json()` to send a response
+- Never leave a request handler without sending a response
+
 ### HTTP Function Structure & Example
 
 ```
 my-http-function/
 ├── scf_bootstrap      # Required: startup script
 ├── package.json       # Dependencies
+├── node_modules/      # Required for HTTP Functions (no auto-install)
 └── index.js           # Application code
 ```
 
-**Node.js Example (Express):**
+**Minimal Node.js Example (Express):**
 ```javascript
 const express = require('express');
 const app = express();
+app.use(express.json());
 
 app.get('/', (req, res) => res.json({ message: 'Hello!' }));
 app.listen(9000);  // Must be port 9000
