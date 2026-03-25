@@ -33,6 +33,7 @@ alwaysApply: false
 - Skipping publishable key and provider checks.
 - Replacing built-in Web auth with cloud function login logic.
 - Reusing this flow in Flutter, React Native, or native iOS/Android code.
+- Creating a detached helper file with `auth.signUp` / `verifyOtp` but never wiring it into the existing form handlers, so the actual button clicks still do nothing.
 
 ## Overview
 
@@ -114,6 +115,29 @@ const { data: loginData, error: loginError } = await data.verifyOtp({ token: '12
 // Phone Otp
 const { data, error } = await auth.signUp({ phone: '13800138000', nickname: 'User' })
 const { data: loginData, error: loginError } = await data.verifyOtp({ token: '123456' })
+```
+
+When the project already has `handleSendCode` / `handleRegister` or similar UI handlers, wire the SDK calls there directly instead of leaving them commented out in `App.tsx`.
+
+```tsx
+const handleSendCode = async () => {
+  const { data, error } = await auth.signUp({
+    email,
+    name: username || email.split('@')[0],
+  })
+  if (error) throw error
+  setSignUpData(data)
+}
+
+const handleRegister = async () => {
+  if (!signUpData?.verifyOtp) throw new Error('Please send the code first')
+  const { error } = await signUpData.verifyOtp({
+    email,
+    token: code,
+    type: 'signup',
+  })
+  if (error) throw error
+}
 ```
 
 **5. Anonymous**
