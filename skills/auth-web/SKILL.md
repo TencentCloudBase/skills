@@ -1,6 +1,6 @@
 ---
 name: auth-web-cloudbase
-description: CloudBase Web Authentication Quick Guide - Provides concise and practical Web frontend authentication solutions with multiple login methods and complete user management.
+description: CloudBase Web Authentication Quick Guide for frontend integration after auth-tool has already been checked. Provides concise and practical Web authentication solutions with multiple login methods and complete user management.
 alwaysApply: false
 ---
 
@@ -8,16 +8,21 @@ alwaysApply: false
 
 ### Use this first when
 
-- The task is a CloudBase Web login, registration, session, or user profile flow built with `@cloudbase/js-sdk`.
+- The task is a CloudBase Web login, registration, session, or user profile flow built with `@cloudbase/js-sdk` and the auth provider setup has already been checked.
 
 ### Read before writing code if
 
-- The user needs a login page, auth modal, session handling, or protected Web route. Read `auth-tool` first to ensure providers are enabled.
+- The user needs a login page, auth modal, session handling, or protected Web route. Read `auth-tool` first to ensure providers are enabled, then return here for frontend integration.
 
 ### Then also read
 
 - `../auth-tool/SKILL.md` for provider setup
 - `../web-development/SKILL.md` for Web project structure and deployment
+
+### Do not start here first when
+
+- The request is a Web auth flow but provider configuration has not been verified yet.
+- In that case, activate `auth-tool-cloudbase` before `auth-web-cloudbase`.
 
 ### Do NOT use for
 
@@ -48,6 +53,14 @@ Use the same CDN address as `web-development`. Prefer npm installation in modern
 
 - Automatically use `auth-tool-cloudbase` to get `publishable key` and configure login methods. 
 - If `auth-tool-cloudbase` failed, let user go to `https://tcb.cloud.tencent.com/dev?envId={env}#/env/apikey` to get `publishable key` and `https://tcb.cloud.tencent.com/dev?envId={env}#/identity/login-manage` to set up login methods
+
+### Parameter map
+
+- `auth.signInWithOtp({ phone })` and `auth.signUp({ phone })` use the phone number in a `phone` field, not `phone_number`
+- `auth.signInWithOtp({ email })` and `auth.signUp({ email })` use `email`
+- `verifyOtp({ token })` expects the SMS or email code in `token`
+- `accessKey` is the publishable key from `auth-tool-cloudbase`, not a secret key
+- If the task mentions provider setup, stop and read `auth-tool-cloudbase` before writing frontend code
 
 ## Quick Start
 
@@ -92,6 +105,7 @@ const { data, error } = await auth.signInWithPassword({ phone: '13800138000', pa
 **4. Registration (Smart: auto-login if exists)**
 - Only support email and phone otp registration
 - Automatically use `auth-tool-cloudbase` turn on `Email Login` or `SMS Login`
+- Use `phone` or `email` in the sign-up payload; do not invent `phone_number`
 ```js
 // Email Otp
 const { data, error } = await auth.signUp({ email: 'new@example.com', nickname: 'User' })

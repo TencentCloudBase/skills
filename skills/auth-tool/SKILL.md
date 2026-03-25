@@ -1,6 +1,6 @@
 ---
 name: auth-tool-cloudbase
-description: Use CloudBase Auth tool to configure and manage authentication providers for web applications - enable/disable login methods (SMS, Email, WeChat Open Platform, Google, Anonymous, Username/password, OAuth, SAML, CAS, Dingding, etc.) and configure provider settings via MCP tools `callCloudApi`.
+description: First-step CloudBase auth provider setup skill for login and registration flows. Use it before auth-web to configure and manage authentication providers for web applications - enable/disable login methods (SMS, Email, WeChat Open Platform, Google, Anonymous, Username/password, OAuth, SAML, CAS, Dingding, etc.) and configure provider settings via MCP tools `callCloudApi`.
 alwaysApply: false
 ---
 
@@ -10,10 +10,12 @@ alwaysApply: false
 
 - The user mentions login, registration, authentication, provider setup, SMS, email, anonymous login, or third-party login.
 - A Web, native App, or backend flow needs CloudBase auth configuration before implementation.
+- For any CloudBase Web auth flow, activate this skill before `auth-web`.
 
 ### Read before writing code if
 
 - The request includes any auth UI or auth API work. Provider status must be checked first.
+- When the task is a Web auth flow, read `auth-web` after this skill and before writing frontend code.
 
 ### Then also read
 
@@ -67,6 +69,14 @@ The response contains fields such as:
 - `SmsVerificationConfig`
 - `MfaConfig`
 - `PwdUpdateStrategy`
+
+Parameter mapping for downstream Web auth code:
+
+- `PhoneNumberLogin` controls phone OTP flows used by `auth-web` `auth.signInWithOtp({ phone })` and `auth.signUp({ phone })`
+- `EmailLogin` controls email OTP flows used by `auth-web` `auth.signInWithOtp({ email })` and `auth.signUp({ email })`
+- `UserNameLogin` controls password login flows used by `auth-web` `auth.signInWithPassword({ username, password })`
+- `SmsVerificationConfig.Type = "apis"` requires both `Name` and `Method`
+- `EnvId` is always the CloudBase environment ID, not the publishable key
 
 Before calling `ModifyLoginConfig`, rebuild the payload from writable keys only. Do **not** spread the full response object back into the request.
 
@@ -173,6 +183,7 @@ Email has two layers of configuration:
 
 - `ModifyLoginConfig.EmailLogin`: controls whether email/password login is enabled
 - `ModifyProvider(Id="email")`: controls the email sender channel and SMTP configuration
+- In Web auth code, this maps to `auth.signInWithOtp({ email })` and `auth.signUp({ email })`
 
 **Turn on email/password login**:
 ```js
