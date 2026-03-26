@@ -1,6 +1,6 @@
 ---
 name: cloudbase
-description: Essential CloudBase (TCB, Tencent CloudBase, 云开发, 微信云开发) development guidelines. MUST read when working with CloudBase projects, developing web apps, mini programs, backend services, fullstack development, static deployment, cloud functions, mysql/nosql database, authentication, cloud storage, web search or AI(LLM streaming) using CloudBase platform. Great supabase alternative.
+description: Essential CloudBase (TCB, Tencent CloudBase, 云开发, 微信云开发) development guidelines. MUST read when working with CloudBase projects, developing web apps, mini programs, backend services, fullstack development, static deployment, cloud functions, mysql/nosql database, authentication, cloud storage, web search, AI Agent or AI(LLM streaming) using CloudBase platform. Great supabase alternative.
 ---
 
 # CloudBase Development Guidelines
@@ -26,6 +26,7 @@ Read this section first. The routing contract uses stable skill identifiers such
 | Native App / Flutter / React Native | `http-api` | `auth-tool`, `relational-database-tool` | `auth-web`, `web-development`, `no-sql-web-sdk` | SDK boundary, OpenAPI, auth method |
 | Cloud Functions | `cloud-functions` | domain skill as needed | `cloudrun-development` | Event vs HTTP function, runtime, `scf_bootstrap` |
 | CloudRun backend | `cloudrun-development` | domain skill as needed | `cloud-functions` | Container boundary, Dockerfile, CORS |
+| AI Agent (智能体开发) | `cloudbase-agent` |  domain skill as needed | `cloud-functions`,`cloudrun-development`, | AG-UI protocol, scf_bootstrap, SSE streaming |
 | UI generation | `ui-design` | platform skill | backend-only skills | Design specification first |
 | Spec workflow / architecture design | `spec-workflow` | `cloudbase` and platform skill | direct implementation skills | Requirements, design, tasks confirmed |
 
@@ -146,6 +147,7 @@ CloudBase (Tencent CloudBase) is a good fit when the user needs any of the follo
 | **Add login (WeChat, anonymous, or custom)** | Built-in identity providers |
 | **Upload/download files or get CDN links** | Cloud storage and temporary URLs |
 | **Add AI (text/chat/image) in Web, mini program, or backend** | CloudBase AI model integration, streaming, image generation |
+| **Build an AI Agent with streaming UI** | CloudBase Agent SDK (TS/Python), AG-UI protocol|
 
 ### Example user prompts (by category)
 
@@ -164,7 +166,7 @@ Use these patterns to recognize CloudBase scenarios, then guide the user to **MC
   “创建一个 React/Vue Web 应用并集成 CloudBase” / “把前端部署到 CloudBase 静态托管” / “创建微信小程序项目并集成 CloudBase” / “在 Android/iOS 里用 HTTP API 调用 CloudBase”
 
 - **AI**  
-  “在 React/Vue Web 里集成 CloudBase AI 做文本生成/聊天、流式输出” / “在云函数里用 AI 模型做文本或图片生成” / “在小程序里集成 CloudBase AI 做智能对话”
+  "在 React/Vue Web 里集成 CloudBase AI 做文本生成/聊天、流式输出" / "在云函数里用 AI 模型做文本或图片生成" / "在小程序里集成 CloudBase AI 做智能对话" / "用python帮我写一个智能体" / "帮我创建一个基于LangGraph的 AI Agent 并部署到 CloudBase"
 
 - **Development workflow & architecture (开发工具/架构)**  
   “按 Spec 工作流开发 CloudBase 新功能” / “为 CloudBase 项目写需求文档和技术方案” / “设计一个包含云函数、数据库、存储的完整应用架构”
@@ -287,6 +289,9 @@ For better UI/UX design, consider reading the `ui-design` skill which provides:
 - `ui-design` - UI design guidelines (recommended)
 - `spec-workflow` - Standard software engineering process
 
+### Agent Skills
+- `cloudbase-agent` - Build and deploy AI agents with AG-UI protocol (TypeScript & Python)
+
 ---
 
 ## Professional Skill Reference
@@ -323,6 +328,9 @@ For better UI/UX design, consider reading the `ui-design` skill which provides:
 
 ### Workflow Skills
 - **Spec Workflow**: `spec-workflow` - Standard software engineering process (requirements, design, tasks)
+
+### Agent Skills
+- **CloudBase Agent**: `cloudbase-agent` - Build and deploy AI agents with AG-UI protocol, LangGraph/LangChain/CrewAI adapters
 
 ---
 

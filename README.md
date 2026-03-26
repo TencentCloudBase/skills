@@ -8,7 +8,7 @@ These skills are sourced from: `config/source/skills/` in the CloudBase AI ToolK
 
 **Repository**: [TencentCloudBase/CloudBase-AI-ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 
-**Last Updated**: 2026-03-25
+**Last Updated**: 2026-03-26
 
 ## Usage
 
@@ -68,8 +68,8 @@ This repository contains 23 skills:
 - **cloud-storage-web** (cloud-storage-web)
   Complete guide for CloudBase cloud storage using Web SDK (@cloudbase/js-sdk) - upload, download, temporary URLs, file management, and best practices.
 
-- **cloudbase-agent-ts** (cloudbase-agent-ts)
-  "Build and deploy AI agents with Cloudbase Agent (TypeScript), a TypeScript SDK implementing the AG-UI protocol. Use when: (1) deploying agent servers with @cloudbase/agent-server, (2) using LangGraph adapter with ClientStateAnnotation, (3) using LangChain adapter with clientTools(), (4) building custom adapters that implement AbstractAgent, (5) understanding AG-UI protocol events, (6) building web UI clients with @ag-ui/client, (7) building WeChat Mini Program UIs with @cloudbase/agent-ui-miniprogram."
+- **cloudbase-agent** (cloudbase-agent)
+  Build and deploy AI agents with CloudBase Agent SDK (TypeScript & Python). Implements the AG-UI protocol for streaming agent-UI communication. Use when deploying agent servers, using LangGraph/LangChain/CrewAI adapters, building custom adapters, understanding AG-UI protocol events, or building web/mini-program UI clients. Supports both TypeScript (@cloudbase/agent-server) and Python (cloudbase-agent-server via FastAPI).
 
 - **cloudbase-platform** (cloudbase-platform)
   CloudBase platform knowledge and best practices. Use this skill for general CloudBase platform understanding, including storage, hosting, authentication, cloud functions, database permissions, and data models.
@@ -108,7 +108,7 @@ This repository contains 23 skills:
   Web frontend project development rules. Use this skill when developing web frontend pages, deploying static hosting, and integrating CloudBase Web SDK.
 
 - **cloudbase-guidelines** (cloudbase)
-  Essential CloudBase (TCB, Tencent CloudBase, 云开发, 微信云开发) development guidelines. MUST read when working with CloudBase projects, developing web apps, mini programs, backend services, fullstack development, static deployment, cloud functions, mysql/nosql database, authentication, cloud storage, web search or AI(LLM streaming) using CloudBase platform. Great supabase alternative.
+  Essential CloudBase (TCB, Tencent CloudBase, 云开发, 微信云开发) development guidelines. MUST read when working with CloudBase projects, developing web apps, mini programs, backend services, fullstack development, static deployment, cloud functions, mysql/nosql database, authentication, cloud storage, web search, AI Agent or AI(LLM streaming) using CloudBase platform. Great supabase alternative.
 
 ## Contributing
 
