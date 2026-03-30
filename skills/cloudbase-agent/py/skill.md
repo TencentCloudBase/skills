@@ -176,7 +176,7 @@ Based on what the user needs, read the corresponding reference document.
 |-----------|-----------|---------------|
 | **Deploying agent to CloudBase** | Read [agent-deployment](agent-deployment.md) | **manageAgent MCP tool (MUST USE)**, 4-step blocking pipeline, Python 3.10, env/ build, verification |
 | Server setup, deployment, middleware, multi-agent, CORS | Read `references/server.md` | AgentServiceApp 3 deployment methods, middleware (generator/yield/onion model), multi-agent server, Agent Creator pattern, health checks |
-| LangGraph agent, callbacks, tool proxy, HITL, checkpoints | Read `references/langgraph.md` | LangGraphAgent constructor, AgentCallback protocol, ToolProxy, human-in-the-loop with interrupt(), TDAICheckpointSaver, client-defined tools |
+| LangGraph agent, callbacks, tool proxy, HITL, checkpoints | Read [adapter-langgraph](adapter-langgraph.md) | LangGraphAgent constructor, AgentCallback protocol, ToolProxy, human-in-the-loop with interrupt(), TDAICheckpointSaver, client-defined tools |
 | Tools: bash, filesystem, code execution, MCP, custom tools | Read `references/tools.md` | create_bash_tool, 8 file tools, code executors, MCPToolkit/CloudBaseMCPServer, @tool decorator, BaseTool, framework adapters |
 | Memory, persistence, short/long-term, MySQL, MongoDB | Read `references/storage.md` | InMemoryMemory, TDAIMemory, MySQLMemory, MongoDBMemory, TDAILongTermMemory, Mem0LongTermMemory, LangGraph checkpoint |
 | Tracing, monitoring, Langfuse, OpenTelemetry | Read `references/observability.md` | ConsoleTraceConfig, OTLPTraceConfig, setup_observability, env vars, manual observation spans |
