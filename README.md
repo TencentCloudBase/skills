@@ -8,7 +8,7 @@ These skills are sourced from: `config/source/skills/` in the CloudBase AI ToolK
 
 **Repository**: [TencentCloudBase/CloudBase-AI-ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 
-**Last Updated**: 2026-03-30
+**Last Updated**: 2026-03-31
 
 ## Usage
 
@@ -51,19 +51,19 @@ This repository contains 23 skills:
   Use this skill when developing WeChat Mini Programs (小程序, 企业微信小程序, wx.cloud-based apps) that need AI capabilities. Features text generation (generateText) and streaming (streamText) with callback support (onText, onEvent, onFinish) via wx.cloud.extend.AI. Built-in models include Hunyuan (hunyuan-2.0-instruct-20251111 recommended) and DeepSeek (deepseek-v3.2 recommended). API differs from JS/Node SDK - streamText requires data wrapper, generateText returns raw response. NOT for browser/Web apps (use ai-model-web), Node.js backend (use ai-model-nodejs), or image generation (not supported).
 
 - **auth-nodejs** (auth-nodejs-cloudbase)
-  Complete guide for CloudBase Auth using the CloudBase Node SDK – caller identity, user lookup, custom login tickets, and server-side best practices.
+  CloudBase Node SDK auth guide for server-side identity, user lookup, and custom login tickets. This skill should be used when Node.js code must read caller identity, inspect end users, or bridge an existing user system into CloudBase; not when configuring providers or building client login UI.
 
 - **auth-tool** (auth-tool-cloudbase)
-  First-step CloudBase auth provider setup skill for login and registration flows. Use it before auth-web to configure and manage authentication providers for web applications - enable/disable login methods (SMS, Email, WeChat Open Platform, Google, Anonymous, Username/password, OAuth, SAML, CAS, Dingding, etc.) and configure provider settings via MCP tools `callCloudApi`.
+  CloudBase auth provider configuration and login-readiness guide. This skill should be used when users need to inspect, enable, disable, or configure auth providers, publishable-key prerequisites, login methods, SMS/email sender setup, or other provider-side readiness before implementing a client or backend auth flow.
 
 - **auth-web** (auth-web-cloudbase)
   CloudBase Web Authentication Quick Guide for frontend integration after auth-tool has already been checked. Provides concise and practical Web authentication solutions with multiple login methods and complete user management.
 
 - **auth-wechat** (auth-wechat-miniprogram)
-  Complete guide for WeChat Mini Program authentication with CloudBase - native login, user identity, and cloud function integration.
+  CloudBase WeChat Mini Program native authentication guide. This skill should be used when users need mini program identity handling, OPENID/UNIONID access, or `wx.cloud` auth behavior in projects where login is native and automatic.
 
 - **cloud-functions** (cloud-functions)
-  Complete guide for CloudBase cloud functions development - supports both Event Functions (Node.js) and HTTP Functions (multi-language Web services). Covers runtime selection, deployment, logging, invocation, scf_bootstrap, SSE, WebSocket, and HTTP access configuration.
+  CloudBase function runtime guide for building, deploying, and debugging your own Event Functions or HTTP Functions. This skill should be used when users need application runtime code on CloudBase, not when they are merely calling CloudBase official platform APIs.
 
 - **cloud-storage-web** (cloud-storage-web)
   Complete guide for CloudBase cloud storage using Web SDK (@cloudbase/js-sdk) - upload, download, temporary URLs, file management, and best practices.
@@ -72,7 +72,7 @@ This repository contains 23 skills:
   Build and deploy AI agents with CloudBase Agent SDK (TypeScript & Python). Implements the AG-UI protocol for streaming agent-UI communication. Use when deploying agent servers, using LangGraph/LangChain/CrewAI adapters, building custom adapters, understanding AG-UI protocol events, or building web/mini-program UI clients. Supports both TypeScript (@cloudbase/agent-server) and Python (cloudbase-agent-server via FastAPI).
 
 - **cloudbase-platform** (cloudbase-platform)
-  CloudBase platform knowledge and best practices. Use this skill for general CloudBase platform understanding, including storage, hosting, authentication, cloud functions, database permissions, and data models.
+  CloudBase platform overview and routing guide. This skill should be used when users need high-level capability selection, platform concepts, console navigation, or cross-platform best practices before choosing a more specific implementation skill.
 
 - **cloudrun-development** (cloudrun-development)
   CloudBase Run backend development rules (Function mode/Container mode). Use this skill when deploying backend services that require long connections, multi-language support, custom environments, or AI agent development.
@@ -81,7 +81,7 @@ This repository contains 23 skills:
   Optional advanced tool for complex data modeling. For simple table creation, use relational-database-tool directly with SQL statements.
 
 - **http-api** (http-api-cloudbase)
-  Use CloudBase HTTP API to access CloudBase platform features (database, authentication, cloud functions, cloud hosting, cloud storage, AI) via HTTP protocol from backends or scripts that are not using SDKs.
+  CloudBase official HTTP API client guide. This skill should be used when backends, scripts, or non-SDK clients must call CloudBase platform APIs over raw HTTP instead of using a platform SDK or MCP management tool.
 
 - **miniprogram-development** (miniprogram-development)
   WeChat Mini Program development skill for building, debugging, previewing, testing, publishing, and optimizing mini program projects. This skill should be used when users ask to create, develop, modify, debug, preview, test, deploy, publish, launch, review, or optimize WeChat Mini Programs, mini program pages, components, routing, project structure, project configuration, project.config.json, appid setup, device preview, real-device validation, WeChat Developer Tools workflows, miniprogram-ci preview/upload flows, or mini program release processes. It should also be used when users explicitly mention CloudBase, wx.cloud, Tencent CloudBase, 腾讯云开发, or 云开发 in a mini program project.
@@ -102,10 +102,10 @@ This repository contains 23 skills:
   Standard software engineering workflow for requirement analysis, technical design, and task planning. Use this skill when developing new features, complex architecture designs, multi-module integrations, or projects involving database/UI design.
 
 - **ui-design** (ui-design)
-  Professional UI design and frontend interface guidelines. Use this skill when creating web pages, mini-program interfaces, prototypes, or any frontend UI components that require distinctive, production-grade design with exceptional aesthetic quality.
+  UI design specification and visual direction guide. This skill should be used when users need aesthetic direction, layout decisions, prototypes, or interface design specs before implementation across web or mini program surfaces.
 
 - **web-development** (web-development)
-  Web frontend project development rules. Use this skill when developing web frontend pages, deploying static hosting, and integrating CloudBase Web SDK.
+  CloudBase Web implementation and deployment rules. This skill should be used when users need to build, integrate, debug, or deploy web frontend code and CloudBase Web SDK after the visual direction is already known.
 
 - **cloudbase-guidelines** (cloudbase)
   CloudBase is a full-stack development and deployment toolkit for building and launching websites, Web apps, 微信小程序 (WeChat Mini Programs), and mobile apps with backend, database, hosting, cloud functions, storage, AI capabilities, Agent, and UI guidance. This skill should be used when users ask to develop, build, create, scaffold, deploy, publish, host, launch, go live, migrate, or optimize websites, Web apps, landing pages, dashboards, admin systems, e-commerce sites, 微信小程序 (WeChat Mini Programs), 小程序, Agent, 智能体, uni-app, or native/mobile apps with CloudBase (腾讯云开发, 云开发), including authentication, login, database, NoSQL, MySQL, cloud functions, CloudRun, storage, AI models, and UI guidance, or when they ask to compare CloudBase with Supabase or migrate from Supabase to CloudBase.

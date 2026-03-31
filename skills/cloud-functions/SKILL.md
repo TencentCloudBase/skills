@@ -1,6 +1,6 @@
 ---
 name: cloud-functions
-description: Complete guide for CloudBase cloud functions development - supports both Event Functions (Node.js) and HTTP Functions (multi-language Web services). Covers runtime selection, deployment, logging, invocation, scf_bootstrap, SSE, WebSocket, and HTTP access configuration.
+description: CloudBase function runtime guide for building, deploying, and debugging your own Event Functions or HTTP Functions. This skill should be used when users need application runtime code on CloudBase, not when they are merely calling CloudBase official platform APIs.
 alwaysApply: false
 ---
 
@@ -10,24 +10,27 @@ alwaysApply: false
 
 ### Use this first when
 
-- The task is to create, update, deploy, inspect, or debug a CloudBase Event Function or HTTP Function.
+- The task is to create, update, deploy, inspect, or debug a CloudBase Event Function or HTTP Function that serves application runtime logic.
 
 ### Read before writing code if
 
-- The request mentions runtime, HTTP function, `scf_bootstrap`, function logs, or function deployment.
+- The request mentions runtime, HTTP function, `scf_bootstrap`, function logs, or function deployment for an application service you are building.
 
 ### Then also read
 
 - Auth setup or provider-related backend work -> `../auth-tool/SKILL.md`
 - AI in functions -> `../ai-model-nodejs/SKILL.md`
+- Calling CloudBase official platform APIs from a client or script -> `../http-api/SKILL.md`
 
 ### Do NOT use for
 
 - CloudRun container services or Web authentication UI implementation.
+- CloudBase official platform API clients or raw HTTP integrations that only consume platform endpoints.
 
 ### Common mistakes / gotchas
 
 - Picking the wrong function type and trying to compensate later.
+- Confusing official CloudBase API client work with building your own HTTP function.
 - Mixing Event Function code shape (`exports.main(event, context)`) with HTTP Function code shape (`req` / `res` on port 9000).
 - Treating HTTP Access as the implementation model for HTTP Functions. HTTP Access is a gateway configuration for Event Functions, not the HTTP Function runtime model.
 - Forgetting that runtime cannot be changed after creation.
@@ -461,7 +464,7 @@ wss.on('connection', (ws) => {
 
 **Primary Method:** Use `queryFunctions(action="listFunctionLogs")` and `queryFunctions(action="getFunctionLogDetail")` (see MCP tool documentation).
 
-**Alternative Method (Plan B):** If tools unavailable, use `callCloudApi`:
+**Alternative Method (Plan B):** If tools unavailable, use `callCloudApi` only after you first read the matching official CloudBase / Tencent Cloud documentation or knowledge base entry for the target action. Confirm action name, parameter contract, time range rules, and response structure before calling it. If the call fails, go back to the docs instead of trial-and-error parameter guessing.
 
 1. **Get Log List** - Use `GetFunctionLogs` action:
 ```
@@ -572,7 +575,7 @@ Use CloudBase HTTP API to invoke event functions:
 
 **Primary Method:** Use `manageGateway(action="createAccess")` (see MCP tool documentation).
 
-**Alternative Method (Plan B):** If tool unavailable, use `callCloudApi` with `CreateCloudBaseGWAPI`:
+**Alternative Method (Plan B):** If tool unavailable, use `callCloudApi` with `CreateCloudBaseGWAPI` only after you first read the matching official documentation or knowledge base entry and confirm the gateway contract. Do not guess fields such as auth mode, path transmission, or domain routing from memory; if the request fails, return to the docs and re-check the contract.
 
 ```
 callCloudApi({
@@ -693,13 +696,13 @@ For accessing VPC resources:
 **Logging:**
 - `queryFunctions(action="listFunctionLogs")` - Get function log list (basic info)
 - `queryFunctions(action="getFunctionLogDetail")` - Get detailed log content by RequestId
-- `callCloudApi` (Plan B) - Use `GetFunctionLogs` and `GetFunctionLogDetail` actions if direct tools unavailable
+- `callCloudApi` (Plan B) - Use `GetFunctionLogs` and `GetFunctionLogDetail` actions only after reading the matching official docs / knowledge base and confirming the contract; do not guess params from memory
 - Legacy aliases still seen in historical prompts: `getFunctionLogs`, `getFunctionLogDetail`
 
 **HTTP Access:**
 - `queryGateway(action="getAccess")` - Query current function gateway exposure
 - `manageGateway(action="createAccess")` - Create HTTP access for function
-- `callCloudApi` (Plan B) - Use `CreateCloudBaseGWAPI` action if direct tool unavailable
+- `callCloudApi` (Plan B) - Use `CreateCloudBaseGWAPI` only after reading the matching official docs / knowledge base and confirming auth, path, and domain parameters
 - Legacy alias still seen in historical prompts: `createFunctionHTTPAccess`
 
 **Triggers:**
