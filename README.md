@@ -8,7 +8,7 @@ These skills are sourced from: `config/source/skills/` in the CloudBase AI ToolK
 
 **Repository**: [TencentCloudBase/CloudBase-AI-ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 
-**Last Updated**: 2026-03-31
+**Last Updated**: 2026-04-01
 
 ## Usage
 
@@ -87,7 +87,7 @@ This repository contains 23 skills:
   WeChat Mini Program development skill for building, debugging, previewing, testing, publishing, and optimizing mini program projects. This skill should be used when users ask to create, develop, modify, debug, preview, test, deploy, publish, launch, review, or optimize WeChat Mini Programs, mini program pages, components, routing, project structure, project configuration, project.config.json, appid setup, device preview, real-device validation, WeChat Developer Tools workflows, miniprogram-ci preview/upload flows, or mini program release processes. It should also be used when users explicitly mention CloudBase, wx.cloud, Tencent CloudBase, 腾讯云开发, or 云开发 in a mini program project.
 
 - **no-sql-web-sdk** (cloudbase-document-database-web-sdk)
-  Use CloudBase document database Web SDK to query, create, update, and delete data. Supports complex queries, pagination, aggregation, and geolocation queries.
+  Use CloudBase document database Web SDK to query, create, update, and delete data. Supports complex queries, pagination, aggregation, realtime, and geolocation queries.
 
 - **no-sql-wx-mp-sdk** (cloudbase-document-database-in-wechat-miniprogram)
   Use CloudBase document database WeChat MiniProgram SDK to query, create, update, and delete data. Supports complex queries, pagination, aggregation, and geolocation queries.
