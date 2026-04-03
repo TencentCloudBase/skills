@@ -99,13 +99,13 @@ This repository contains 23 skills:
   Use when building frontend Web apps that talk to CloudBase Relational Database via @cloudbase/js-sdk – provides the canonical init pattern so you can then use Supabase-style queries from the browser.
 
 - **spec-workflow** (spec-workflow)
-  Standard software engineering workflow for requirement analysis, technical design, and task planning. Use this skill when developing new features, complex architecture designs, multi-module integrations, or projects involving database/UI design.
+  Use when medium-to-large changes need explicit requirements, technical design, and task planning before implementation, especially for multi-module work, unclear acceptance criteria, or architecture-heavy requests.
 
 - **ui-design** (ui-design)
-  UI design specification and visual direction guide. This skill should be used when users need aesthetic direction, layout decisions, prototypes, or interface design specs before implementation across web or mini program surfaces.
+  Use when users need visual direction, interface hierarchy, layout decisions, design specifications, or prototypes before implementing a Web or mini program UI.
 
 - **web-development** (web-development)
-  CloudBase Web implementation and deployment rules. This skill should be used when users need to build, integrate, debug, or deploy web frontend code and CloudBase Web SDK after the visual direction is already known.
+  Use when users need to implement, integrate, debug, build, deploy, or validate a Web frontend after the product direction is already clear, especially for React, Vue, Vite, browser flows, or CloudBase Web integration.
 
 - **cloudbase-guidelines** (cloudbase)
   CloudBase is a full-stack development and deployment toolkit for building and launching websites, Web apps, 微信小程序 (WeChat Mini Programs), and mobile apps with backend, database, hosting, cloud functions, storage, AI capabilities, Agent, and UI guidance. This skill should be used when users ask to develop, build, create, scaffold, deploy, publish, host, launch, go live, migrate, or optimize websites, Web apps, landing pages, dashboards, admin systems, e-commerce sites, 微信小程序 (WeChat Mini Programs), 小程序, Agent, 智能体, uni-app, or native/mobile apps with CloudBase (腾讯云开发, 云开发), including authentication, login, database, NoSQL, MySQL, cloud functions, CloudRun, storage, AI models, and UI guidance, or when they ask to compare CloudBase with Supabase or migrate from Supabase to CloudBase.
