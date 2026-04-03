@@ -389,7 +389,9 @@ When users request deployment to CloudBase:
 
 ## CloudBase Console Entry Points
 
-After creating/deploying resources, provide corresponding console management page links. All console URLs follow the pattern: `https://tcb.cloud.tencent.com/dev?envId=${envId}#/{path}`
+After creating/deploying resources, provide corresponding console management page links. All console URLs follow the pattern: `https://tcb.cloud.tencent.com/dev?envId=${envId}#/{path}`.
+
+The CloudBase console changes frequently. If a logged-in console shows a different hash path from this list, prefer the live console path and update the source skill docs instead of copying stale URLs forward.
 
 ### Core Function Entry Points
 1. **Overview (概览)**: `#/overview` - Main dashboard
@@ -405,4 +407,4 @@ After creating/deploying resources, provide corresponding console management pag
 11. **Weida Low-Code (微搭低代码)**: `#/lowcode/apps`
 12. **Logs & Monitoring (日志监控)**: `#/devops/log`
 13. **Extensions (扩展功能)**: `#/apis`
-14. **Environment Settings (环境配置)**: `#/env`
+14. **Environment Settings (环境配置)**: `#/env/http-access`
