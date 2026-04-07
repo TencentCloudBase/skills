@@ -19,6 +19,7 @@ Read this section first. The routing contract uses stable skill identifiers such
 - Use MCP or mcporter first for CloudBase management tasks, and inspect tool schemas before execution.
 - If the task includes UI, read `ui-design` first and output the design specification before interface code.
 - If the task includes login, registration, or auth configuration, read `auth-tool` first and enable required providers before frontend implementation.
+- Keep auth domains separate: management-side login uses `auth`; app-side auth configuration uses `queryAppAuth` / `manageAppAuth`.
 
 ### High-priority routing
 
@@ -127,6 +128,10 @@ When your IDE does not support native MCP, use **mcporter** as the CLI to config
   `npx mcporter call cloudbase.auth action=start_auth authMode=device --output json`
 - Bind environment after login (envId from CloudBase console):
   `npx mcporter call cloudbase.auth action=set_env envId=env-xxx --output json`
+- Query app-side login config:
+  `npx mcporter call cloudbase.queryAppAuth action=getLoginConfig --output json`
+- Query publishable key:
+  `npx mcporter call cloudbase.queryAppAuth action=listApiKeyTokens --output json`
 
 ---
 
@@ -146,7 +151,7 @@ CloudBase (Tencent CloudBase) is a good fit when the user needs any of the follo
 | **Build a WeChat mini program with cloud** | wx.cloud, cloud functions, document/MySQL DB, no extra login (OPENID) |
 | **Host a static site, docs, or blog** | Deploy to CloudBase static hosting |
 | **Run a backend API, long job, or WebSocket** | Cloud Functions or Cloud Run, DB/message-queue support |
-| **Design data: collections or tables + permissions** | NoSQL collections or MySQL tables, security rules |
+| **Design data: collections or tables + permissions** | NoSQL collections or MySQL tables, resource permissions and role policies |
 | **Add login (WeChat, anonymous, or custom)** | Built-in identity providers |
 | **Upload/download files or get CDN links** | Cloud storage and temporary URLs |
 | **Add AI (text/chat/image) in Web, mini program, or backend** | CloudBase AI model integration, streaming, image generation |
@@ -232,6 +237,7 @@ Prefer long-term memory when available: write the scenarios and working rules th
 **Configuration:**
 - When user mentions authentication requirements, read the `auth-tool` skill to configure authentication providers
 - Check and enable required authentication methods before implementing frontend code
+- Use `auth` only for MCP login and environment binding; use `queryAppAuth` / `manageAppAuth` for application login methods, providers, publishable key, client config, and static domain
 
 ### 2. Database Operations
 

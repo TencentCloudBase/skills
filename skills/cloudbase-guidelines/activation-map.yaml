@@ -15,7 +15,7 @@ scenarios:
       - web-development
     beforeAction:
       - 先检查并开启所需登录方式，再写前端代码。
-      - 获取 publishable key 并确认使用 Web SDK。
+      - 优先通过 `queryAppAuth` / `manageAppAuth` 获取 publishable key 并确认使用 Web SDK。
     doNotUse:
       - cloud-functions
       - http-api
@@ -59,7 +59,7 @@ scenarios:
       - relational-database-tool
     beforeAction:
       - 先确认当前平台不支持 CloudBase SDK。
-      - 确认 HTTP API 鉴权方式、Base URL 和数据库能力边界。
+      - 确认 HTTP API 鉴权方式、Base URL 和数据库能力边界；应用侧登录配置仍走 `queryAppAuth` / `manageAppAuth`。
     doNotUse:
       - auth-web
       - no-sql-web-sdk

@@ -1,6 +1,3 @@
-<a href="https://cloud.tencent.com/developer/article/2649588" target="_blank"><img width="3094" height="654" alt="banner" src="https://github.com/user-attachments/assets/37982d04-274a-4b6c-85b8-06983c615d9a" /></a>
-
-
 # CloudBase AI Agent Skills
 
 This repository contains agent skills for CloudBase development, extracted from the [CloudBase AI ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit).
@@ -11,7 +8,7 @@ These skills are sourced from: `config/source/skills/` in the CloudBase AI ToolK
 
 **Repository**: [TencentCloudBase/CloudBase-AI-ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 
-**Last Updated**: 2026-04-03
+**Last Updated**: 2026-04-07
 
 ## Usage
 
@@ -96,7 +93,7 @@ This repository contains 23 skills:
   Use CloudBase document database WeChat MiniProgram SDK to query, create, update, and delete data. Supports complex queries, pagination, aggregation, and geolocation queries.
 
 - **relational-database-tool** (relational-database-mcp-cloudbase)
-  This is the required documentation for agents operating on the CloudBase Relational Database through MCP. It defines the canonical SQL management flow with `querySqlDatabase`, `manageSqlDatabase`, `readSecurityRule`, and `writeSecurityRule`, including MySQL provisioning, destroy flow, async status checks, safe query execution, schema initialization, and security rule updates.
+  This is the required documentation for agents operating on the CloudBase Relational Database through MCP. It defines the canonical SQL management flow with `querySqlDatabase`, `manageSqlDatabase`, `queryPermissions`, and `managePermissions`, including MySQL provisioning, destroy flow, async status checks, safe query execution, schema initialization, and permission updates.
 
 - **relational-database-web** (relational-database-web-cloudbase)
   Use when building frontend Web apps that talk to CloudBase Relational Database via @cloudbase/js-sdk – provides the canonical init pattern so you can then use Supabase-style queries from the browser.
