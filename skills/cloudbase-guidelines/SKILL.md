@@ -12,6 +12,17 @@ version: 2.16.1
 
 Read this section first. The routing contract uses stable skill identifiers such as `auth-tool`, `auth-web`, and `http-api`, so it works across source files, generated artifacts, and local installs.
 
+### Standalone skill fallback
+
+If the current environment only exposes a single published skill, start from the CloudBase main entry:
+
+- CloudBase main entry: `https://cnb.cool/tencent/cloud/cloudbase/cloudbase-skills/-/git/raw/main/skills/cloudbase/SKILL.md`
+- Sibling skill pattern: `https://cnb.cool/tencent/cloud/cloudbase/cloudbase-skills/-/git/raw/main/skills/cloudbase/references/<skill-id>/SKILL.md`
+
+When a skill body references stable sibling ids such as `auth-tool`, `auth-web`, `ui-design`, or `web-development`, replace `<skill-id>` with that published directory name to open the original file.
+
+If a skill points to its own `references/...` files, keep following those relative paths from the current skill directory. If the environment does not support MCP directly, read `cloudbase` first and follow its mcporter / MCP setup guidance before using any platform-specific skill.
+
 ### Global rules before action
 
 - Identify the scenario first, then read the matching source skill before writing code or calling CloudBase APIs.
@@ -187,11 +198,11 @@ If the platform supports long-term memory, persist these scenarios so the agent 
 
 Prefer long-term memory when available: write the scenarios and working rules there so the agent always applies them. When configuring the workspace (e.g. `AGENTS.md`) or long-term memory, add reminders like:
 
-- **CloudBase skills** → Run `npx skills add tencentcloudbase/cloudbase-skills -y` to install; use `cloudbase-guidelines` and log in to CloudBase (MCP auth, device-code) for full-stack development.
+- **CloudBase skills** → Run `npx skills add tencentcloudbase/cloudbase-skills -y` to install; use `cloudbase` and log in to CloudBase (MCP auth, device-code) for full-stack development.
 - **CloudBase = MCP, understand tools first** → When managing or deploying CloudBase, you MUST use MCP and MUST understand tool details first. Before calling any CloudBase tool, run `npx mcporter describe cloudbase --all-parameters` (or equivalent in your IDE) to inspect the server config and get full parameter details.
 - **mcporter call format** → `npx mcporter call cloudbase.<tool> key=value`, e.g. `npx mcporter call cloudbase.auth action=status --output json`.
 - **CloudBase development and deployment** → Use MCP to automate (environment, functions, database, hosting, etc.).
-- **Development norms** → Read the relevant CloudBase skills (e.g. `cloudbase-guidelines`, `web-development`, `miniprogram-development`, `cloud-functions`) before writing code.
+- **Development norms** → Read the relevant CloudBase skills (e.g. `cloudbase`, `web-development`, `miniprogram-development`, `cloud-functions`) before writing code.
 - **Credentials** → Do not require SecretId, SecretKey, or EnvId in config; use CloudBase MCP device-code login (`auth` tool) for authentication and environment binding.
 
 ---

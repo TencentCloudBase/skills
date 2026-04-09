@@ -8,7 +8,7 @@ These skills are sourced from: `config/source/skills/` in the CloudBase AI ToolK
 
 **Repository**: [TencentCloudBase/CloudBase-AI-ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 
-**Last Updated**: 2026-04-08
+**Last Updated**: 2026-04-09
 
 ## Usage
 
@@ -98,10 +98,10 @@ This repository contains 23 skills:
 - **relational-database-web** (relational-database-web-cloudbase)
   Use when building frontend Web apps that talk to CloudBase Relational Database via @cloudbase/js-sdk – provides the canonical init pattern so you can then use Supabase-style queries from the browser.
 
-- **spec-workflow** (spec-workflow)
+- **spec-workflow** (spec-workflow-guide)
   Use when medium-to-large changes need explicit requirements, technical design, and task planning before implementation, especially for multi-module work, unclear acceptance criteria, or architecture-heavy requests.
 
-- **ui-design** (ui-design)
+- **ui-design** (ui-design-guide)
   Use when users need visual direction, interface hierarchy, layout decisions, design specifications, or prototypes before implementing a Web or mini program UI.
 
 - **web-development** (web-development)
