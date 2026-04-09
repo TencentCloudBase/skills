@@ -98,10 +98,10 @@ This repository contains 23 skills:
 - **relational-database-web** (relational-database-web-cloudbase)
   Use when building frontend Web apps that talk to CloudBase Relational Database via @cloudbase/js-sdk – provides the canonical init pattern so you can then use Supabase-style queries from the browser.
 
-- **spec-workflow** (spec-workflow-guide)
+- **spec-workflow** (spec-workflow)
   Use when medium-to-large changes need explicit requirements, technical design, and task planning before implementation, especially for multi-module work, unclear acceptance criteria, or architecture-heavy requests.
 
-- **ui-design** (ui-design-guide)
+- **ui-design** (ui-design)
   Use when users need visual direction, interface hierarchy, layout decisions, design specifications, or prototypes before implementing a Web or mini program UI.
 
 - **web-development** (web-development)
