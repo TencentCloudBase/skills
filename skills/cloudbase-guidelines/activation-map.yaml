@@ -191,6 +191,32 @@ scenarios:
     commonMistakes:
       - Web 场景读成小程序或原生 App 路径。
 
+  - id: ops-inspector
+    priority: 82
+    signals:
+      - 巡检
+      - 诊断
+      - health check
+      - 资源健康
+      - 异常日志
+      - error inspection
+      - troubleshooting
+      - 错误排查
+    firstRead: ops-inspector
+    thenRead:
+      - cloud-functions
+      - cloudrun-development
+    beforeAction:
+      - 先确认环境已绑定且 CLS 日志服务已开通。
+      - 收集所有资源状态后再下结论，避免孤立分析单一日志。
+    doNotUse:
+      - ui-design
+      - spec-workflow
+    commonMistakes:
+      - CLS 未开通就尝试搜索日志。
+      - 不指定时间范围就搜索日志，导致返回大量无关结果。
+      - 只看单条错误日志，不做跨资源关联分析。
+
   - id: spec-workflow
     priority: 75
     signals:

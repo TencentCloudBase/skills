@@ -44,6 +44,7 @@ If a skill points to its own `references/...` files, keep following those relati
 | AI Agent (智能体开发) | `cloudbase-agent` |  domain skill as needed | `cloud-functions`,`cloudrun-development`, | AG-UI protocol, scf_bootstrap, SSE streaming |
 | UI generation | `ui-design` | platform skill | backend-only skills | Design specification first |
 | Spec workflow / architecture design | `spec-workflow` | `cloudbase` and platform skill | direct implementation skills | Requirements, design, tasks confirmed |
+| Resource health inspection / troubleshooting / 巡检 / 诊断 | `ops-inspector` | `cloud-functions`, `cloudrun-development` | `ui-design`, `spec-workflow` | CLS enabled, time range for logs |
 
 ### Routing reminders
 
@@ -317,6 +318,9 @@ For better UI/UX design, consider reading the `ui-design` skill which provides:
 
 ### Workflow Skills
 - **Spec Workflow**: `spec-workflow` - Standard software engineering process (requirements, design, tasks)
+
+### Ops Skills
+- **Ops Inspector**: `ops-inspector` - AIOps-style resource health inspection, error diagnosis, and troubleshooting
 
 ### Agent Skills
 - **CloudBase Agent**: `cloudbase-agent` - Build and deploy AI agents with AG-UI protocol, LangGraph/LangChain/CrewAI adapters

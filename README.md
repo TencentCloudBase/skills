@@ -39,7 +39,7 @@ cp -r config/source/skills/auth-tool .cursor/skills/
 
 ## Available Skills
 
-This repository contains 23 skills:
+This repository contains 24 skills:
 
 - **ai-model-nodejs** (ai-model-nodejs)
   Use this skill when developing Node.js backend services or CloudBase cloud functions (Express/Koa/NestJS, serverless, backend APIs) that need AI capabilities. Features text generation (generateText), streaming (streamText), AND image generation (generateImage) via @cloudbase/node-sdk ≥3.16.0. Built-in models include Hunyuan (hunyuan-2.0-instruct-20251111 recommended), DeepSeek (deepseek-v3.2 recommended), and hunyuan-image for images. This is the ONLY SDK that supports image generation. NOT for browser/Web apps (use ai-model-web) or WeChat Mini Program (use ai-model-wechat).
@@ -91,6 +91,9 @@ This repository contains 23 skills:
 
 - **no-sql-wx-mp-sdk** (cloudbase-document-database-in-wechat-miniprogram)
   Use CloudBase document database WeChat MiniProgram SDK to query, create, update, and delete data. Supports complex queries, pagination, aggregation, and geolocation queries.
+
+- **ops-inspector** (ops-inspector)
+  AIOps-style one-click inspection skill for CloudBase resources. Use this skill when users need to diagnose errors, check resource health, inspect logs, or run a comprehensive health check across cloud functions, CloudRun services, databases, and other CloudBase resources.
 
 - **relational-database-tool** (relational-database-mcp-cloudbase)
   This is the required documentation for agents operating on the CloudBase Relational Database through MCP. It defines the canonical SQL management flow with `querySqlDatabase`, `manageSqlDatabase`, `queryPermissions`, and `managePermissions`, including MySQL provisioning, destroy flow, async status checks, safe query execution, schema initialization, and permission updates.
