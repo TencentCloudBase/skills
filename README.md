@@ -8,7 +8,7 @@ These skills are sourced from: `config/source/skills/` in the CloudBase AI ToolK
 
 **Repository**: [TencentCloudBase/CloudBase-AI-ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 
-**Last Updated**: 2026-04-15
+**Last Updated**: 2026-04-16
 
 ## Usage
 
@@ -39,7 +39,7 @@ cp -r config/source/skills/auth-tool .cursor/skills/
 
 ## Available Skills
 
-This repository contains 24 skills:
+This repository contains 25 skills:
 
 - **ai-model-nodejs** (ai-model-nodejs)
   Use this skill when developing Node.js backend services or CloudBase cloud functions (Express/Koa/NestJS, serverless, backend APIs) that need AI capabilities. Features text generation (generateText), streaming (streamText), AND image generation (generateImage) via @cloudbase/node-sdk ≥3.16.0. Built-in models include Hunyuan (hunyuan-2.0-instruct-20251111 recommended), DeepSeek (deepseek-v3.2 recommended), and hunyuan-image for images. This is the ONLY SDK that supports image generation. NOT for browser/Web apps (use ai-model-web) or WeChat Mini Program (use ai-model-wechat).
@@ -70,6 +70,9 @@ This repository contains 24 skills:
 
 - **cloudbase-agent** (cloudbase-agent)
   Build and deploy AI agents with CloudBase Agent SDK (TypeScript & Python). Implements the AG-UI protocol for streaming agent-UI communication. Use when deploying agent servers, using LangGraph/LangChain/CrewAI adapters, building custom adapters, understanding AG-UI protocol events, or building web/mini-program UI clients. Supports both TypeScript (@cloudbase/agent-server) and Python (cloudbase-agent-server via FastAPI).
+
+- **cloudbase-cli** (cloudbase-cli)
+  CloudBase CLI (tcb, 云开发CLI, Tencent CloudBase命令行) resource management skill. This skill should be used when users need to deploy cloud functions, manage CloudRun apps, upload files to storage, query NoSQL/MySQL databases, deploy static hosting, set access permissions, or configure CORS/domains/routing via tcb commands. Also use for CI/CD pipeline scripting, batch operations, terminal-based CloudBase management, or when the user prefers CLI over SDK/MCP.
 
 - **cloudbase-platform** (cloudbase-platform)
   CloudBase platform overview and routing guide. This skill should be used when users need high-level capability selection, platform concepts, console navigation, or cross-platform best practices before choosing a more specific implementation skill.

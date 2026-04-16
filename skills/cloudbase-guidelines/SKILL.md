@@ -196,6 +196,9 @@ Use these patterns to recognize CloudBase scenarios, then guide the user to **MC
 - **AI**  
   "在 React/Vue Web 里集成 CloudBase AI 做文本生成/聊天、流式输出" / "在云函数里用 AI 模型做文本或图片生成" / "在小程序里集成 CloudBase AI 做智能对话" / "用python帮我写一个智能体" / "帮我创建一个基于LangGraph的 AI Agent 并部署到 CloudBase"
 
+- **CLI Operations (命令行操作)**  
+  “用 tcb 命令部署云函数” / “通过命令行管理 CloudBase 资源” / “在 CI/CD 中使用 tcb 部署” / “用 CLI 批量操作存储文件”
+
 - **Development workflow & architecture (开发工具/架构)**  
   “按 Spec 工作流开发 CloudBase 新功能” / “为 CloudBase 项目写需求文档和技术方案” / “设计一个包含云函数、数据库、存储的完整应用架构”
 
@@ -234,6 +237,11 @@ Prefer long-term memory when available: write the scenarios and working rules th
    - NoSQL: `no-sql-wx-mp-sdk` skill
    - MySQL: `relational-database-tool` skill (via tools)
 4. **UI Design** (Recommended): Read the `ui-design` skill for better UI/UX design guidelines
+
+### When Using CLI for Resource Management:
+1. **CLI Operations**: Read the `cloudbase-cli` skill for managing CloudBase via `tcb` commands
+2. Covers: function deployment, CloudRun, hosting, storage, databases, permissions, access config
+3. **Best for**: CI/CD pipelines, scripting, batch operations, or when users prefer CLI over SDK/MCP
 
 ### When Developing a Native App Project (iOS/Android/Flutter/React Native/etc.):
 1. **⚠️ Platform Limitation**: Native apps do NOT support CloudBase SDK - Must use HTTP API
@@ -291,6 +299,9 @@ For better UI/UX design, consider reading the `ui-design` skill which provides:
 ---
 
 ## Professional Skill Reference
+
+### CLI Management Skills
+- **CLI**: `cloudbase-cli` - Manage all CloudBase resources via `tcb` CLI (functions, CloudRun, hosting, storage, databases, permissions, access)
 
 ### Platform Development Skills
 - **Web**: `web-development` - SDK integration, static hosting, build configuration
@@ -358,6 +369,7 @@ When users request deployment to CloudBase:
    - Only for nodejs cloud functions: deploy directly using `manageFunctions(action="createFunction")` / `manageFunctions(action="updateFunctionCode")`
      - Legacy compatibility: if older materials mention `createFunction`, `updateFunctionCode`, or `getFunctionList`, map them to `manageFunctions(...)` and `queryFunctions(...)`
      - Criteria: function directory contains `index.js` with cloud function format export: `exports.main = async (event, context) => {}`
+   - **Alternative: CLI Deployment** — If MCP is unavailable or the user prefers CLI, read the `cloudbase-cli` skill for `tcb`-based deployment workflows (functions, CloudRun, hosting).
    - For other languages backend server (Java, Go, PHP, Python, Node.js): deploy to Cloud Run
    - Ensure backend code supports CORS by default
    - Prepare Dockerfile for containerized deployment
