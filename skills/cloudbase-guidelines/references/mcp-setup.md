@@ -1,8 +1,52 @@
 # CloudBase MCP Setup Reference
 
+## Preferred: Install CloudBase Plugin (global)
+
+When the user asks to install CloudBase / the AI Toolkit / the plugin, **prefer the Open Plugin Spec CLI** over hand-writing MCP JSON. One install brings MCP + Skills + Hooks.
+
+Default: `--scope user` (global).
+
+```bash
+npx plugins add TencentCloudBase/cloudbase-plugin -y --scope user
+
+# Optional: Sites plugin
+npx plugins add TencentCloudBase/cloudbase-sites-plugin -y --scope user
+```
+
+- Omit `--target` to install into all detected supported AI IDEs.
+- After install, ask the user to restart / reload the target tool (e.g. Claude Code `/reload-plugins`).
+
+### Supported `npx plugins` targets (`--target`)
+
+List live detection with `npx plugins targets`. Current supported target IDs:
+
+| Target ID (`--target`) | AI IDE | Notes |
+|------------------------|--------|--------|
+| `claude-code` | Claude Code | Config under `~/.claude` |
+| `cursor` | Cursor | Config under `~/.cursor` |
+| `codex` | Codex | Config under `~/.codex` |
+| `grok` | Grok Build | Config under `~/.grok`; per-user only |
+| `kimi` | Kimi Code | Config under `~/.kimi-code`; per-user only |
+| `github-copilot` | GitHub Copilot CLI | Config under `~/.copilot`; standalone `copilot` CLI, not `gh copilot` |
+| `vscode` | Visual Studio Code | Agent plugins (Preview); per-user only |
+
+Examples:
+
+```bash
+npx plugins add TencentCloudBase/cloudbase-plugin -y --scope user --target cursor
+
+npx plugins targets
+```
+
+**Not supported by `npx plugins` yet** (use each product's native path): CodeBuddy, WorkBuddy, ZCode, WindSurf, and other IDEs without Open Plugin Spec. For those, use Approach A (native MCP) or Approach B (mcporter) below, plus Skills if needed.
+
+**Do not double-install:** if Claude Code / Codex already has the plugin via marketplace (`claude plugin install` / `codex plugin add`), do **not** also run `npx plugins add` for the same tool.
+
+---
+
 ## Approach A: IDE Native MCP
 
-Configure via your IDE's MCP settings:
+Configure via your IDE's MCP settings when Plugin install is unavailable:
 
 ```json
 {
@@ -37,7 +81,7 @@ Configure via your IDE's MCP settings:
 
 ## Approach B: mcporter CLI
 
-When your IDE does not support native MCP, use **mcporter** as the CLI.
+When your IDE does not support native MCP or Plugin install, use **mcporter** as the CLI.
 
 **Step 1 — Check**: `npx mcporter list | grep cloudbase`
 

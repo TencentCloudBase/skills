@@ -94,7 +94,11 @@ These rules override convenience. Full rationale lives in `web-development`.
 
 ## MCP prerequisite
 
-CloudBase MCP is **required** for management/deploy. Setup details: `references/mcp-setup.md`. Verify with `npx mcporter list | grep cloudbase` or the IDE MCP panel before any CloudBase tool call. Prefer device-code login via `auth`; do not hard-code secrets.
+CloudBase MCP is **required** for management/deploy. Setup details: `references/mcp-setup.md`.
+
+- **Preferred install:** `npx plugins add TencentCloudBase/cloudbase-plugin -y --scope user`. Supported `--target` IDs: `claude-code`, `cursor`, `codex`, `grok`, `kimi`, `github-copilot`, `vscode`. See `references/mcp-setup.md`.
+- Verify with `npx mcporter list | grep cloudbase` or the IDE MCP panel before any CloudBase tool call.
+- Prefer device-code login via `auth`; do not hard-code secrets.
 
 ## On-demand references
 
@@ -103,5 +107,5 @@ Load only when needed (do not expand this entry):
 - `references/deployment-workflow.md` — deploy backend/frontend, `manageApps` vs hosting, URL/docs updates
 - `references/console-links.md` — console hash paths after creating resources
 - `references/scenarios.md` — user-need → CloudBase capability mapping
-- `references/mcp-setup.md` — IDE MCP / mcporter config and auth examples
+- `references/mcp-setup.md` — Plugin install (global default + targets), IDE MCP / mcporter config and auth examples
 - `references/activation-map.yaml` — canonical routing contract source
