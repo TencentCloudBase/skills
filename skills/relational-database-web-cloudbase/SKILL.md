@@ -4,8 +4,8 @@ description: "[Deprecated] Use when building frontend Web apps that talk to Clou
 version: 2.24.1
 alwaysApply: false
 metadata:
-  priority: 5
-  deprecated: true
+  priority: "5"
+  deprecated: "true"
 ---
 
 ## Standalone Install Note
@@ -13,9 +13,9 @@ metadata:
 If this environment only installed the current skill, start from the CloudBase main entry and use the published `cloudbase/references/...` paths for sibling skills.
 
 - CloudBase main entry: `https://cnb.cool/tencent/cloud/cloudbase/cloudbase-skills/-/git/raw/main/skills/cloudbase/SKILL.md`
-- Current skill raw source: `https://cnb.cool/tencent/cloud/cloudbase/cloudbase-skills/-/git/raw/main/skills/cloudbase/references/relational-database-web/SKILL.md`
+- Current skill raw source: `https://cnb.cool/tencent/cloud/cloudbase/cloudbase-skills/-/git/raw/main/skills/cloudbase/references/relational-database-web-cloudbase/SKILL.md`
 
-Keep local `references/...` paths for files that ship with the current skill directory. When this file points to a sibling skill such as `auth-tool` or `web-development`, use the standalone fallback URL shown next to that reference.
+Keep local `references/...` paths for files that ship with the current skill directory. When this file points to a sibling skill such as `auth-tool-cloudbase` or `web-development`, use the standalone fallback URL shown next to that reference.
 
 # CloudBase Relational Database Web SDK
 
@@ -33,8 +33,8 @@ Keep local `references/...` paths for files that ship with the current skill dir
 
 ### Then also read
 
-- MySQL SQL management and MCP operations -> `../relational-database-tool/SKILL.md` (standalone fallback: `https://cnb.cool/tencent/cloud/cloudbase/cloudbase-skills/-/git/raw/main/skills/cloudbase/references/relational-database-tool/SKILL.md`)
-- Web auth/login -> `../auth-web/SKILL.md` (standalone fallback: `https://cnb.cool/tencent/cloud/cloudbase/cloudbase-skills/-/git/raw/main/skills/cloudbase/references/auth-web/SKILL.md`)
+- MySQL SQL management and MCP operations -> `../relational-database-mcp-cloudbase/SKILL.md` (standalone fallback: `https://cnb.cool/tencent/cloud/cloudbase/cloudbase-skills/-/git/raw/main/skills/cloudbase/references/relational-database-mcp-cloudbase/SKILL.md`)
+- Web auth/login -> `../auth-web-cloudbase/SKILL.md` (standalone fallback: `https://cnb.cool/tencent/cloud/cloudbase/cloudbase-skills/-/git/raw/main/skills/cloudbase/references/auth-web-cloudbase/SKILL.md`)
 - General Web app setup -> `../web-development/SKILL.md` (standalone fallback: `https://cnb.cool/tencent/cloud/cloudbase/cloudbase-skills/-/git/raw/main/skills/cloudbase/references/web-development/SKILL.md`)
 
 ### Do NOT use for
@@ -54,7 +54,7 @@ Keep local `references/...` paths for files that ship with the current skill dir
 
 - Confirm the caller is a Web frontend.
 - Keep one shared CloudBase app and one shared relational DB client.
-- Route MySQL provisioning/schema work to `relational-database-tool`. If the task says PostgreSQL, CloudBase PG, PG mode, `app.rdb()`, `queryPgDatabase`, `managePgDatabase`, or RLS, route to `postgresql-development` instead.
+- Route MySQL provisioning/schema work to `relational-database-mcp-cloudbase`. If the task says PostgreSQL, CloudBase PG, PG mode, `app.rdb()`, `queryPgDatabase`, `managePgDatabase`, or RLS, route to `postgresql-development-cloudbase` instead.
 - Handle auth separately before data access.
 
 ## Overview
@@ -99,13 +99,13 @@ const db = app.rdb();
 - you are replacing a Supabase browser client with CloudBase
 - you need a canonical shared frontend `db` client
 
-### Use `relational-database-tool` instead when
+### Use `relational-database-mcp-cloudbase` instead when
 
 - you need to create/destroy MySQL
 - you need MySQL DDL or write-SQL administration
 - you need to inspect or change MySQL table security rules through MCP
 
-### Use `postgresql-development` instead when
+### Use `postgresql-development-cloudbase` instead when
 
 - the task says PostgreSQL, CloudBase PG, PG mode, `app.rdb()`, `queryPgDatabase`, `managePgDatabase`, PostgREST, or RLS
 - browser-side table code must use PG semantics rather than legacy NoSQL / MySQL management tools

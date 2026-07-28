@@ -15,9 +15,9 @@ Use this checklist before generating any CloudBase authentication flow.
 3. Check which login methods are required and enable them first.
 4. For Web flows, get or confirm the publishable key before writing frontend auth code.
 5. Route to the matching implementation skill after provider setup:
-   - Web -> `auth-web`
-   - Mini program -> `auth-wechat`
-   - Native app / raw HTTP -> `http-api`
+   - Web -> `auth-web-cloudbase`
+   - Mini program -> `auth-wechat-miniprogram`
+   - Native app / raw HTTP -> `http-api-cloudbase`
 6. Keep MCP tool routing explicit:
    - management-side login -> `auth`
    - application-side auth config -> `queryAppAuth` / `manageAppAuth`
