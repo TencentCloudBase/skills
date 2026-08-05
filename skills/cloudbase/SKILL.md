@@ -27,12 +27,13 @@ Routing uses stable skill ids (`auth-tool-cloudbase`, `auth-web-cloudbase`, `htt
 
 ### Standalone skill fallback
 
-If only one published skill is exposed, start from the CloudBase main entry:
+If only one published skill is exposed:
 
-- CloudBase main entry: `https://cnb.cool/tencent/cloud/cloudbase/cloudbase-skills/-/git/raw/main/skills/cloudbase/SKILL.md`
-- Sibling skill pattern: `https://cnb.cool/tencent/cloud/cloudbase/cloudbase-skills/-/git/raw/main/skills/cloudbase/references/<skill-id>/SKILL.md`
+- Prefer local relative paths (`references/<skill-id>/SKILL.md` or sibling skill directories) when those files exist in the workspace.
+- Do **not** fetch sibling skill markdown from remote raw URLs into the agent context.
+- If a required sibling skill is missing locally, ask the user to install the full CloudBase skills pack or IDE plugin (`npx skills add tencentcloudbase/cloudbase-skills`), then continue using local files only.
 
-Replace `<skill-id>` with the published directory name. Follow relative `references/...` paths from the current skill. If MCP is unavailable, read `cloudbase` and follow `references/mcp-setup.md` / mcporter setup first.
+Follow relative `references/...` paths from the current skill. If MCP is unavailable, read the local `cloudbase` entry skill and follow `references/mcp-setup.md` / mcporter setup first.
 
 ### Global rules before action
 
