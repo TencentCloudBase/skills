@@ -84,7 +84,7 @@ These rules override convenience. Full rationale lives in `web-development`.
 | AI model call (大模型调用 / 文本生成 / 图片生成 / 流式对话) | `ai-model-web` | ai-model-nodejs, ai-model-wechat | cloudbase-agent, cloud-functions, cloudrun-development | 先跑「调用前必须的资格检查」：`DescribeActivityInfo`（小程序成长计划） + `DescribeEnvPostpayPackage`（Token Credits 资源包） |
 | UI generation | `ui-design` | web-development, miniprogram-development | cloud-functions | Design specification first |
 | AI Model (Web) | `web-development` | ai-model-web, ui-design | ai-model-wechat, http-api | Platform and streaming interaction mode |
-| Resource health inspection / troubleshooting | `ops-inspector` | cloud-functions, cloudrun-development | ui-design, spec-workflow | CLS enabled, time range for logs |
+| Resource health inspection / troubleshooting | `ops-inspector` | cloud-functions, cloudrun-development | ui-design, spec-workflow | CLS enabled; use queryEnv(action=metrics) for QPS/CPU (never callCloudApi); time range for logs |
 | Spec workflow / architecture design | `spec-workflow` | cloudbase | web-development, cloud-functions | Requirements, design, tasks confirmed |
 
 ### Routing reminders
