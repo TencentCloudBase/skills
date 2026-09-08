@@ -39,7 +39,7 @@ cp -r config/source/skills/auth-tool .cursor/skills/
 
 ## Available Skills
 
-This repository contains 30 skills:
+This repository contains 31 skills:
 
 - **ai-model-nodejs** (ai-model-nodejs)
   "Use this skill for Node.js backend AI via @cloudbase/node-sdk (>=3.16.0) — cloud functions, CloudRun, Express/Koa/NestJS, serverless APIs, scheduled jobs, LLM proxies, agent orchestration. The only SDK supporting image generation (ai.createImageModel + generateImage). Text via ai.createModel with groups cloudbase, hunyuan-exp, or custom-*; model ids (e.g. deepseek-v4-flash, glm-5, kimi-k2.6) go in the `model` field of generateText/streamText. MUST run two-step preflight before code — see body. NOT for browser/Web (use ai-model-web) or Mini Program (use ai-model-wechat)."
@@ -79,6 +79,9 @@ This repository contains 30 skills:
 
 - **cloudbase-code-review** (cloudbase-code-review)
   "Code review and validation for CloudBase projects. After writing code for Web / miniprogram / CloudRun / cloud-function projects, call this skill to check for known pitfalls — auth guard misuse, missing database tables, RLS misconfiguration, storage domain setup, and SDK API misuse. Supports automated lint scripts (regex-based) + LLM semantic review."
+
+- **cloudbase-declarative-deploy** (cloudbase-declarative-deploy)
+  CloudBase declarative deployment from a cloudbaserc config (声明式部署, 配置式部署, cloudbaserc 部署) through the deployApply / deployPlan MCP tools. Use when deploying database, functions, app, hosting, or gateway resources described in cloudbaserc.json/yaml as a single desired-state config, when a user wants a dry-run plan before applying, or when handling multi-environment deploys via mode / envOverrides. Covers plan-then-apply flow (deployPlan dry-run → deployApply confirm=true), envId resolution priority, only/skip filtering, concurrency, and continueOnError. Prefer deployPlan before deployApply; do not confuse with per-resource tcb CLI deploy or single-function deploy.
 
 - **cloudbase-document-database-in-wechat-miniprogram** (cloudbase-document-database-in-wechat-miniprogram)
   Use CloudBase document database WeChat MiniProgram SDK to query, create, update, and delete data. Supports complex queries, pagination, aggregation, and geolocation queries.
