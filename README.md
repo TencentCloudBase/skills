@@ -90,7 +90,7 @@ This repository contains 32 skills:
   Use CloudBase document database Web SDK only for confirmed NoSQL collection work. Query, create, update, and delete document data; if the task mentions PostgreSQL / CloudBase PG / app.rdb(), route to postgresql-development instead.
 
 - **cloudbase-platform** (cloudbase-platform)
-  CloudBase platform overview and routing guide. This skill should be used when users need high-level capability selection, platform concepts, console navigation, or cross-platform best practices before choosing a more specific implementation skill.
+  CloudBase platform overview and routing guide. This skill should be used when users need high-level capability selection, platform concepts, console navigation, realtime (broadcast / presence / live database changes), or cross-platform best practices before choosing a more specific implementation skill.
 
 - **cloudbase-wechat-integration** (cloudbase-wechat-integration)
   CloudBase WeChat integration guide for Mini Program WeChat Pay, Mini Program virtual payment (虚拟支付, wx.requestVirtualPayment), Official Account JSAPI Pay, Native QR-code Pay, Official Account OAuth, openid handling, payment callbacks, and CloudBase Integration Center generated functions. This skill should be used when users ask to add, debug, or extend WeChat payment, virtual payment, or official-account flows on CloudBase.
