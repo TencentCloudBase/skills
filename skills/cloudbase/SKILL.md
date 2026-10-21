@@ -18,15 +18,15 @@ Infer it when you can (console domain, envId, an existing error); otherwise **as
 | | 国内站 domestic | 国际站 international |
 |---|---|---|
 | Remote MCP (preferred) | `https://tcb-api.cloud.tencent.com/mcp/v1` | `https://tcb-api.tencentcloud.com/mcp/v1` |
-| Local stdio MCP | default — nothing to set | `TCB_SITE=intl` + `TCB_REGION=ap-singapore` |
+| Local stdio MCP | nothing to set (`TCB_SITE` is domestic by default) | `TCB_SITE=intl` + `TCB_REGION=ap-singapore` |
 | `tcb` CLI | default | `TCB_IS_INTL=true` (or `tcb config set isIntl true`) |
 | Project record `.cloudbase/project.json` | `site` omitted, or `"domestic"` | `"site": "intl"`, `"region": "ap-singapore"` |
 | Console | `tcb.cloud.tencent.com` | `tcb.tencentcloud.com` |
 | Default region | `ap-shanghai` | `ap-singapore` |
 | NoSQL / document DB tools | available | **not available** |
 
-- **International users: connect the international remote MCP endpoint directly** — `https://tcb-api.tencentcloud.com/mcp/v1`. It is a first-class hosted endpoint; OAuth covers the login. The site is decided by the host, so there is no `site` query parameter to pass.
-- Domestic remote MCP is the same shape at `https://tcb-api.cloud.tencent.com/mcp/v1` — that stays the default for domestic users.
+- **Connect remote by default.** Both hosts are first-class endpoints: OAuth covers the login and the hostname decides the site, so there is no `site` parameter to pass. International: `https://tcb-api.tencentcloud.com/mcp/v1`; domestic: `https://tcb-api.cloud.tencent.com/mcp/v1`.
+- **Use local stdio only when something requires it** — an account signing in with a CloudBase API key, one session that must cover both sites (a remote URL is bound to one), or a task that needs a tool the hosted endpoint does not register. Deploying functions or apps is not a reason: that works remotely through the two-step upload. Comparison: `references/mcp-setup.md`.
 - `TCB_IS_INTL` (CLI) and `TCB_SITE` (MCP) are **different variable names for different tools**. Set the one matching the tool in use; setting the wrong one silently does nothing.
 - On a first run, **settle the site once and persist it** — the CLI switch is machine-global, the MCP switch is per-client, and only `.cloudbase/project.json` is project-scoped and readable by MCP after a restart. Follow `references/site-onboarding.md`; do not re-ask on later sessions.
 
