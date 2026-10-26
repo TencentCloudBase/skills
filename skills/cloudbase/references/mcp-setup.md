@@ -121,6 +121,28 @@ npx plugins add TencentCloudBase/cloudbase-sites-plugin -y --scope user
 - Omit `--target` to install into all detected supported AI IDEs.
 - After install, ask the user to restart / reload the target tool (e.g. Claude Code `/reload-plugins`).
 
+### No git on the machine
+
+`npx plugins add` with `owner/repo` or an `https://` URL runs `git clone`. A CNB URL is git too. When the command fails with `program not found`, download the tarball over HTTPS and install from the local directory:
+
+```bash
+# Plugin: download → extract → install from the local directory
+curl -L https://codeload.github.com/TencentCloudBase/cloudbase-plugin/tar.gz/refs/heads/main -o cloudbase-plugin.tgz
+tar xzf cloudbase-plugin.tgz
+npx plugins add ./cloudbase-plugin-main -y --scope user --target <target>
+
+# Skills: an archive URL is downloaded and unpacked, and does not need git
+npx skills add https://codeload.github.com/TencentCloudBase/cloudbase-skills/tar.gz/refs/heads/main -y
+```
+
+Three differences from the git install:
+
+- `--target` is required. With no detected client the CLI fails with `No supported targets detected`.
+- The marketplace name is the directory name `cloudbase-plugin-main`.
+- Auto-update is off, because there is no git repo behind the install. Updating means downloading and installing again.
+
+Windows 10+ includes `curl` and `tar`. When Git can be installed, prefer [Git for Windows](https://git-scm.com/download/win) so later updates stay on the git install.
+
 ### Supported `npx plugins` targets (`--target`)
 
 List live detection with `npx plugins targets`. Current supported target IDs:
