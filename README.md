@@ -39,7 +39,7 @@ cp -r config/source/skills/auth-tool .cursor/skills/
 
 ## Available Skills
 
-This repository contains 33 skills:
+This repository contains 32 skills:
 
 - **ai-model-nodejs** (ai-model-nodejs)
   "Use this skill for Node.js backend AI via @cloudbase/node-sdk (>=3.16.0) — cloud functions, CloudRun, Express/Koa/NestJS, serverless APIs, scheduled jobs, LLM proxies, agent orchestration. The only SDK supporting image generation (ai.createImageModel + generateImage). Text via ai.createModel with groups cloudbase, the legacy hunyuan-v3 / hunyuan-exp, or custom-*; model ids (e.g. deepseek-v4-flash, glm-5, kimi-k2.6) go in the `model` field of generateText/streamText. MUST run two-step preflight before code — see body. NOT for browser/Web (use ai-model-web) or Mini Program (use ai-model-wechat)."
@@ -100,9 +100,6 @@ This repository contains 33 skills:
 
 - **cloudrun-development** (cloudrun-development)
   CloudBase Run backend development rules (Function mode/Container mode). Use this skill when deploying backend services that require long connections, multi-language support, custom environments, AI agent development, or migrating existing/GitHub apps that need VPC access to MySQL/PostgreSQL/Redis. Also use when diagnosing CloudRun container deploy failures (deploy_failed, readiness/probe failed, image won't start, docker.io pull loops) or a deploy stuck behind a running deploy task. For stateless HTTP services, prefer HTTP cloud functions.
-
-- **data-model-creation** (data-model-creation)
-  "[Deprecated] Optional Mermaid classDiagram modeling path. Schema and SQL for PostgreSQL / CloudBase PG go through postgresql-development (queryPgDatabase / managePgDatabase)."
 
 - **http-api-cloudbase** (http-api-cloudbase)
   CloudBase official HTTP API client guide. This skill should be used when backends, scripts, or non-SDK clients must call CloudBase platform APIs over raw HTTP instead of using a platform SDK or MCP management tool.
