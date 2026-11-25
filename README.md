@@ -8,7 +8,7 @@ These skills are sourced from: `config/source/skills/` in the CloudBase AI ToolK
 
 **Repository**: [TencentCloudBase/CloudBase-AI-ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 
-**Last Updated**: 2026-11-19
+**Last Updated**: 2026-11-25
 
 ## Usage
 
@@ -84,10 +84,10 @@ This repository contains 32 skills:
   "CloudBase declarative deployment from a cloudbaserc config (声明式部署, 配置式部署, cloudbaserc 部署) through the deployBuild / deployPlan / deployApply MCP tools. Use when deploying database, functions, app, hosting, or gateway resources described in cloudbaserc.json/yaml as a single desired-state config, when a user wants to build static hosting artifacts locally first (deployBuild), or wants a dry-run plan before applying (deployPlan), or for multi-environment deploys via mode / envOverrides. Covers the build-plan-apply flow (local build → dry-run plan → apply), the deploy-but-never-build contract for app and hosting, reading buildHint (buildCommand / outputDir / artifactReady) from the plan, hosting build-output neutralization, BUILD_OUTPUT_NOT_FOUND recovery, envId resolution priority, only/skip filtering, concurrency, and continueOnError. deployApply builds nothing: use deployBuild for hosting and build app yourself before applying; distinct from per-resource tcb CLI deploys."
 
 - **cloudbase-document-database-in-wechat-miniprogram** (cloudbase-document-database-in-wechat-miniprogram)
-  Use CloudBase document database WeChat MiniProgram SDK to query, create, update, and delete data. Supports complex queries, pagination, aggregation, and geolocation queries.
+  "Use CloudBase document database WeChat MiniProgram SDK to query, create, update, and delete data. Supports complex queries, pagination, aggregation, and geolocation queries. Also use when a PostgreSQL-mode environment must run existing document-database cloud functions / wx.cloud.database() code: pgdoc / PG Document plugin (EnablePGDocumentExt) carries those requests on PG with no SDK rewrite — read ../postgresql-development-cloudbase/references/pgdoc.md before advising a rebuild or an app.rdb() rewrite."
 
 - **cloudbase-document-database-web-sdk** (cloudbase-document-database-web-sdk)
-  Use CloudBase document database Web SDK only for confirmed NoSQL collection work. Query, create, update, and delete document data; if the task mentions PostgreSQL / CloudBase PG / app.rdb(), route to postgresql-development instead.
+  "Use CloudBase document database Web SDK only for confirmed NoSQL collection work. Query, create, update, and delete document data; if the task mentions PostgreSQL / CloudBase PG / app.rdb(), route to postgresql-development instead. Exception: when an existing document-database app must keep running on a PostgreSQL environment, that is the pgdoc / PG Document plugin — keep app.database() / db.collection() unchanged and read ../postgresql-development-cloudbase/references/pgdoc.md; the redirect above applies only to NEW PG business tables."
 
 - **cloudbase-mcp** (cloudbase-mcp)
   CloudBase MCP reference. Use when connecting local or remote MCP, calling tools from the shell with mcporter, reading tool schemas, choosing the domestic or international endpoint, setting site, region, cloud mode, or plugin flags, or contributing a fix to the open-source MCP server, skills, or CLI.
@@ -117,7 +117,7 @@ This repository contains 32 skills:
   "CloudBase PostgreSQL access-pattern and slow-query quality guidance. Use when designing how tables are read and written, eliminating per-row database calls, adding indexes for filters or joins, reviewing high-traffic data access, or explaining a slow SQL query. Not for first-time PG SDK setup, login UI, or NoSQL collections."
 
 - **postgresql-development-cloudbase** (postgresql-development-cloudbase)
-  "Use when building, debugging, or evaluating CloudBase PostgreSQL / CloudBase PG / PG mode apps, including Postgres schema setup, queryPgDatabase/managePgDatabase, JS SDK v3 app.rdb() CRUD/RPC, PG HTTP API fallback, RLS-style permissions, username-password auth, and Web CMS/admin CRUD flows backed by CloudBase PG."
+  "Use when building, debugging, or evaluating CloudBase PostgreSQL / CloudBase PG / PG mode apps, including Postgres schema setup, queryPgDatabase/managePgDatabase, JS SDK v3 app.rdb() CRUD/RPC, PG HTTP API fallback, RLS-style permissions, username-password auth, and Web CMS/admin CRUD flows backed by CloudBase PG. Also use when an existing document-database app (app.database() / db.collection() / wx.cloud.database() / wx-server-sdk cloud functions) must run on a PostgreSQL environment without rewriting its SDK calls — that is the pgdoc / PG Document plugin (EnablePGDocumentExt), not a PG rewrite; see references/pgdoc.md."
 
 - **relational-database-mcp-cloudbase** (relational-database-mcp-cloudbase)
   "[Deprecated] Existing CloudBase MySQL only. Do not recommend MySQL for new relational work — use postgresql-development. Read this when the environment already has a MySQL instance and the task is queryMysqlDatabase, manageMysqlDatabase, queryPermissions, or managePermissions (inspect, write SQL, schema, permissions, destroy). Do not provision MySQL."
